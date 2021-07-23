@@ -1,0 +1,20 @@
+#scroll {
+    width: 100%;
+    
+    overflow-y: scroll;
+ }
+#scroll::-webkit-scrollbar {
+     width: 5px;
+     height: 5px;
+ }
+ 
+#scroll::-webkit-scrollbar-track {
+     -webkit-box-shadow: inset 0 0 6px rgba(53, 53, 53, 0.3); 
+     border-radius: 10px;
+ }
+ 
+#scroll::-webkit-scrollbar-thumb {
+     border-radius: 50px;
+     -webkit-box-shadow: inset 0 0 6px rgba(53, 53, 53, 0.1); 
+ }
+ 

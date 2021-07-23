@@ -1,0 +1,41 @@
+import { useEffect, useRef } from 'react';
+import { Box,Text} from '@chakra-ui/react'
+import { MessageBox } from './MessageBox';
+
+
+export const PanelChat = ({messages,supId}) => {
+    
+
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(scrollToBottom, [messages]);
+
+
+
+   
+    return(
+        <Box
+        id="scroll"
+        height="container.lg"
+        width= "100%"
+        bgImage={`${process.env.NEXT_PUBLIC_HOST}/bgchat2.png`}
+        bgPosition="center"
+        bgRepeat="no-repeat"
+        bgSize="cover"
+        overflowY="scroll"
+        
+        >
+        {
+        messages.map((m)=>
+                <MessageBox supId={supId} message={m}/>
+            )
+        
+        }
+        <div ref={messagesEndRef} />
+        </Box>
+    )
+}
