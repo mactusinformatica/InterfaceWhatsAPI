@@ -1,4 +1,4 @@
-
+import {AuthProvider} from '../context/AuthContext'
 import {Head} from 'next/head'
 import { ChakraProvider, ColorModeProvider,extendTheme, CSSReset } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
@@ -37,7 +37,9 @@ function MyApp({ Component, pageProps }) {
           useSystemColorMode: true,
         }}
       >
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
       </ColorModeProvider>
     </ChakraProvider>
   )

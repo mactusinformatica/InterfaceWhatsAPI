@@ -18,8 +18,6 @@ const theme = extendTheme({
     initialColorMode: "dark",
     useSystemColorMode: false,
   }, 
-  
-  
   colors: {
     light:{
       primary:'rgb(55, 182, 237)',
@@ -49,8 +47,6 @@ const theme = extendTheme({
       
 
     }
-    
-
   },
   fonts,
   breakpoints

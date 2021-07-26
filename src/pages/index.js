@@ -1,5 +1,3 @@
-
-
 import {useRouter} from 'next/router'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
@@ -9,6 +7,8 @@ import { Flex,FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import{useState,createContext,useEffect} from 'react'
 import useSocket from '../hooks/useSocket'
 import getDateTime from '../services/getDateTime'
+
+
 
 const Index = ({serverChat})=>{
   //Temporário
@@ -67,14 +67,6 @@ const Index = ({serverChat})=>{
     </Container>
   )
   
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {
-        serverChat: process.env.NEXT_PUBLIC_SERVER_CHAT, 
-    }, 
-  }
 }
 
 
