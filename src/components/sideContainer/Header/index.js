@@ -4,20 +4,22 @@ import { Box,useColorMode, Text,Input,Menu,MenuButton,MenuList, MenuItem, IconBu
 import { BsFillPersonFill,BsFilterRight,BsSearch} from "react-icons/bs"
 import { MdSettings,MdExitToApp} from "react-icons/md"
 import { Avatar } from "../../Avatar";
-
+import { DarkModeSwitch } from '../../DarkModeSwitch'
 export const Header = (props) => {
     const {user, signout} = useAuth();
     const firstName = user?.name  
                                                                                                                               
     const {colorMode} = useColorMode();
-    const primaryColor ={ light: 'light.primary', dark: 'dark.primary' }
+    const primaryColor ={ light: 'dark.primary', dark: 'light.primary' }
+    
     const bgColor =  { light: 'light.background', dark: 'dark.background' }
- 
+    const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' }
+
     return(
         <Box
         w="100%"
-        p={4}
-        bg={primaryColor[colorMode]}>
+        pt={4} pl={4} pr={4}
+        bg={hoverSecondary[colorMode]}>
             <Box
                 display="flex"
                 alignItems="center"
@@ -27,17 +29,17 @@ export const Header = (props) => {
                     <Avatar
                     
                     icon={<BsFillPersonFill />}
-                    bg={bgColor[colorMode]} 
-                    color={primaryColor[colorMode]}
+                    bg={primaryColor[colorMode]} 
+                    color={"#ffffff"}
                     fontSize={"25px"}
                     size={"35px"}
                     />
-                    <Text marginLeft='7px' color="#FFFFFF"fontSize="18px" fontWeight='500'>
+                    <Text marginLeft='7px'fontSize="18px" fontWeight='400'>
                         {(firstName?.length <= 14?firstName:firstName?.substring(0,14)+"...")}
                     </Text>
                 </Box>
                 
-                <Menu>
+                <Menu closeOnSelect={false}>
                     <MenuButton
                         as={IconButton}
                         aria-label="Options"
@@ -53,13 +55,18 @@ export const Header = (props) => {
                     />
                     <MenuList  
                     p={0} minW="0"
-                    w={'100px'}
+                    w={'150px'}
                     mt={'-3'}
                     ml={'3'}
                     >
-                        <MenuItem onClick={()=>signout()} icon={<MdExitToApp fontSize='16px'/>}>
+                       
+                        <MenuItem>
+                            <DarkModeSwitch />  DarkMode
+                        </MenuItem> 
+                        <MenuItem fontSize={'16px'} onClick={()=>signout()} icon={<MdExitToApp fontSize='20px'/>}>
                             Sair 
-                        </MenuItem>
+                        </MenuItem> 
+                         
                     </MenuList>
                 </Menu>
 

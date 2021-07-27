@@ -25,13 +25,15 @@ const theme = extendTheme({
       hoverSecondary:"#E5F6FD",
       background:'#f9f9f9f9', 
       fontColor:"#164B61",
+      boxMessage: "rgb(99, 179, 237)"
     },
     dark:{
       primary:'#164B61',
       secondary:"#1e4d60",
-      hoverSecondary:"#466b7a",
+      hoverSecondary:"#164B61",
       background:'#1B262C',
       fontColor:"rgba(255, 255, 255, 1)",
+      boxMessage: "rgb(26, 54, 93)"
     },
     colorful:{
       red: "rgb(224, 74, 99)",

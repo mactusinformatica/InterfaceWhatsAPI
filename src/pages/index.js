@@ -2,7 +2,6 @@ import {parseCookies} from 'nookies'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
 import { ChatContainer } from '../components/chatContainer'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import { Flex,FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import{useState,createContext,useEffect} from 'react'
 
@@ -14,7 +13,7 @@ const Index = ({serverChat})=>{
 
   return(
     <Container height="100vh">
-       <DarkModeSwitch />     
+        
        
        <Flex
       direction="row"

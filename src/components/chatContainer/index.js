@@ -78,9 +78,9 @@ export const ChatContainer = ({active, setactive}) => {
         height= "100%"
         width= "600px"
         bgPosition="center"
-        boxShadow="2xl"
-        borderTop={"1px"}
+        borderTop={"0px"}
         borderRight={"1px"}
+        borderLeft={"1px"}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"

@@ -11,7 +11,6 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
   } from "@chakra-ui/react"
 import getDateTime from '../../services/getDateTime'
 
@@ -39,7 +38,7 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
         justifyContent="space-between"
         alignItems="start">
             <Flex>
-                <Box>
+                {/* <Box>
                 <Avatar  bg={primaryColor[colorMode]} 
                         color={bgColor[colorMode]}
                         fontSize={"25px"}
@@ -47,13 +46,13 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                         icon={<BsFillPersonFill />}
                         width=""
                         />
-                </Box>
+                </Box> */}
                 
                 <Box display="flex"
                    
                     alignItems="center" >
-                    <Text wordBreak="break-word" fontSize={"16px"} color={fontColor[colorMode]} fontWeight={"600"} marginLeft="10px">
-                    {active.name.toUpperCase()}</Text>
+                    <Text wordBreak="break-word" fontSize={"20px"} color={fontColor[colorMode]} fontWeight={"600"} marginLeft="10px">
+                    {active.name}</Text>
                 </Box>
             </Flex>
 
@@ -72,7 +71,7 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                      >
                          FINALIZAR
                     </Button>
-                    <Modal   isOpen={isOpen} onClose={onClose}>
+                    <Modal  isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent p={4} width='max-content'>
                             <ModalBody>
@@ -91,8 +90,7 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                             </ModalFooter>
                         </ModalContent>
                     </Modal>
-                    
-                
+
                     <Button 
                      size="sm"
                      pl={"5px"}
@@ -107,7 +105,6 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                          SAIR
                     </Button>
                   
-                    
                 </Stack>
 
                 

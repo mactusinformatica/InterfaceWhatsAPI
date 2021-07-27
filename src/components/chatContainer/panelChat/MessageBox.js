@@ -11,6 +11,7 @@ export const MessageBox = ({message}) => {
     const primaryColorDark = { light: 'dark.primary', dark: 'dark.primary' }
     const primaryColor = { light: 'light.primary', dark: 'light.primary' }
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'light.hoverSecondary' }
+    const boxMessageColor = { light: 'light.boxMessage', dark: 'dark.boxMessage'}
     return(
         <>
         {message.id_author==0?
@@ -39,7 +40,7 @@ export const MessageBox = ({message}) => {
         :message.id_author == user.id?
         <Flex width="100%"  justifyContent="flex-end">
             <Box 
-            bg={"blue.300"}
+            bg={boxMessageColor[colorMode]}
             
             minWidth="100px"
             maxWidth="450px" 

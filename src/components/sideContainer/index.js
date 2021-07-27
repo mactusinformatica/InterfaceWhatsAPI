@@ -65,9 +65,9 @@ export const SideContainer = (props) => {
       justifyContent="flex-start"
       bg={'transparent'}
       color={color[colorMode]}
-      boxShadow="xl"
-      borderRight="0px" borderColor={`${primaryColor[colorMode]}`}
+      borderLeft="1px" borderColor={`${primaryColor[colorMode]}`}
 
+      
       {...props}>
         
         <Header/>
