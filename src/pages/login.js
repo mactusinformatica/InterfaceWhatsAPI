@@ -2,6 +2,7 @@ import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,
 import {ViewOffIcon , ViewIcon, WarningIcon} from '@chakra-ui/icons'
 import { useState, useEffect} from 'react';
 import useAuth from '../hooks/useAuth';
+import {parseCookies} from 'nookies'
 
 const Login = ()=>{
 
@@ -118,5 +119,23 @@ const Login = ()=>{
         </Flex>
     );
 }
+
+
+export const getServerSideProps = async(ctx)=>{
+
+    const { 'macwhatsapi-auth': token } = parseCookies(ctx)
+    if (token) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        }
+      }
+    }
+    return {
+      props: {}
+    }
+  }
+
 
 export default Login;
