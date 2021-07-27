@@ -1,13 +1,13 @@
 
 import { Box,Text, Flex, useColorMode} from '@chakra-ui/react'
+import useAuth from '../../../hooks/useAuth';
 
 
 
+export const MessageBox = ({message}) => {
+    const {user} = useAuth();
 
-export const MessageBox = ({message, supId}) => {
-    
     const {colorMode} = useColorMode();
-    
     const primaryColorDark = { light: 'dark.primary', dark: 'dark.primary' }
     const primaryColor = { light: 'light.primary', dark: 'light.primary' }
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'light.hoverSecondary' }
@@ -36,7 +36,7 @@ export const MessageBox = ({message, supId}) => {
                 </Text> 
             </Box>
         </Flex>
-        :message.id_author == supId?
+        :message.id_author == user.id?
         <Flex width="100%"  justifyContent="flex-end">
             <Box 
             bg={"blue.300"}

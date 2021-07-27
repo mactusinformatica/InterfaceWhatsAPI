@@ -1,14 +1,47 @@
 import Router from "next/router";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
+import {parseCookies,setCookie, destroyCookie} from 'nookies';
+import jwt_decode from 'jwt-decode';
 const AuthContext = createContext();
 
 export function AuthProvider({children}){
     const[user, setUser] = useState(null);
     const[loading, setLoading] = useState(true);
 
+    const isAuthenticated = !!user;
+    useEffect(()=>{
+        const {"macwhatsapi-auth": token} = parseCookies();
+        if(token){
+            
+            const decodeToken =  jwt_decode(token, {payload:true});
+            var userObj = formatUser(decodeToken)
+            setUser(userObj)
+        }
+    },[])
 
-    const signin = ({email,password}, callback)=>{
+    const formatUser = (user)=>{
+        var uId;
+        var uName;
+        var uToken;
+        if(user.nome){
+             uId = user.id
+             uName = user.nome.split(" ")[0]
+             uToken = user.token
+        }else if(user.name){
+             uId = user.id
+             uName = user.name.split(" ")[0]
+             uToken = user.token
+        }
+
+        return {
+            id: uId,
+            name: uName,
+            token: uToken
+            }
+    }
+
+    const signin = async ({email,password})=>{
         setLoading(true);
         try{
             const formData = new FormData();
@@ -20,38 +53,45 @@ export function AuthProvider({children}){
                 url: process.env.NEXT_PUBLIC_API_FINANCEIRO,
                 data : formData
             };
-            axios(config).then(function (res) {
+            const response = await axios(config).then(async function (res) {
                 
-                setUser(res.data);
                 
                 if(res.data.erro == false){
+                   
+
+                    var userObj = formatUser(res.data)
+                    await setUser(userObj);
+                    await setCookie(undefined,"macwhatsapi-auth",userObj.token,{
+                        maxAge: 60 * 60 * 24 //24h
+                    })
+                    
                     Router.push('/');
                 }else{
-                    callback
+                    return false;
                 }
                 
             })
             .catch(function (error) {
-                //   console.log("ASDDDDDDD")
                 setUser(error.data);
             });
+            return response;
         }
         finally {
             setLoading(false);
         }
     }
-
     const signout = ()=>{
         setLoading(true);
         try{
-            Router.push('/');
-            return setUser(false);
+            Router.push('/login');
+            destroyCookie(undefined, 'macwhatsapi-auth');
+            
         }
         finally{
+            setUser(false);
             setLoading(false);
         }
     }
-
 
     return <AuthContext.Provider value={{
         user,

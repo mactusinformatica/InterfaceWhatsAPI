@@ -1,5 +1,6 @@
 
 import {useState, useEffect} from 'react'
+import useAuth from '../../../hooks/useAuth';
 import { Box, useColorMode} from '@chakra-ui/react'
 import { AttachmentIcon} from '@chakra-ui/icons'
 import { BsFillMicFill} from "react-icons/bs"
@@ -9,14 +10,13 @@ import getDateTime from '../../../services/getDateTime'
 
 
 
-export const InputChat = ({active, socket, supId,supName}) => {
+export const InputChat = ({active, socket}) => {
+    const {user} = useAuth();
     const [text, setText] = useState("");
     const {colorMode} = useColorMode();
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' }
-
-   
     
- 
+
     function sendMessage(){
         var dateTime = getDateTime()
         
@@ -25,11 +25,11 @@ export const InputChat = ({active, socket, supId,supName}) => {
            
             socket.emit('chat-message',
             {
-                id_author:supId,
+                id_author:user.id,
                 content:text,
                 type:"text",
                 room: active.id_room,
-                name_author:supName,
+                name_author:user?.name,
                 schedule_message: dateTime.time,
                 channel: active.channel,
                 isSupport: true,
@@ -53,9 +53,9 @@ export const InputChat = ({active, socket, supId,supName}) => {
         alignItems="center"
         >
 
-        <ButtonInput event={setText} icon={<AttachmentIcon  fontSize={"25px"}/>} />
+        {/* <ButtonInput event={setText} icon={<AttachmentIcon  fontSize={"25px"}/>} /> */}
 
-        <Box width="400px" pt={"5px"}>
+        <Box width="85%" pt={"5px"}>
             
             <textarea
             onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}
@@ -81,10 +81,11 @@ export const InputChat = ({active, socket, supId,supName}) => {
         </Box>
         {
         text?
-        <ButtonInput event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
+        <ButtonInput 
+        mr={"10px"} event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
         :
-        <ButtonInput event={sendMessage} icon={<BsFillMicFill  fontSize={"25px"}/>} />
-
+        // <ButtonInput event={sendMessages} icon={<BsFillMicFill  fontSize={"25px"}/>} />
+        <ButtonInput event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
         }
         </Box>
     );

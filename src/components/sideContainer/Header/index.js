@@ -1,11 +1,13 @@
-import { Box,useColorMode, Text,Input } from "@chakra-ui/react"
+
+import useAuth from '../../../hooks/useAuth'
+import { Box,useColorMode, Text,Input,Menu,MenuButton,MenuList, MenuItem, IconButton } from "@chakra-ui/react"
 import { BsFillPersonFill,BsFilterRight,BsSearch} from "react-icons/bs"
-import { MdSettings} from "react-icons/md"
+import { MdSettings,MdExitToApp} from "react-icons/md"
 import { Avatar } from "../../Avatar";
 
 export const Header = (props) => {
-    const name = props.supname;          
-    const firstName = name.split(" ")[0]  
+    const {user, signout} = useAuth();
+    const firstName = user?.name  
                                                                                                                               
     const {colorMode} = useColorMode();
     const primaryColor ={ light: 'light.primary', dark: 'dark.primary' }
@@ -21,21 +23,49 @@ export const Header = (props) => {
                 alignItems="center"
                 justifyContent="space-between"
                 marginBottom={"10px"}>
-              
-                <Avatar
-               
-                icon={<BsFillPersonFill />}
-                bg={bgColor[colorMode]} 
-                color={primaryColor[colorMode]}
-                fontSize={"25px"}
-                size={"35px"}
-                />
-                    <Text marginLeft='7px' color="#FFFFFF"fontSize="16px" fontWeight='500'>
-                        {(firstName.length <= 14?firstName:firstName.substring(0,14)+"...").toUpperCase()}
+                <Box display={"flex"} alignItems="center">
+                    <Avatar
+                    
+                    icon={<BsFillPersonFill />}
+                    bg={bgColor[colorMode]} 
+                    color={primaryColor[colorMode]}
+                    fontSize={"25px"}
+                    size={"35px"}
+                    />
+                    <Text marginLeft='7px' color="#FFFFFF"fontSize="18px" fontWeight='500'>
+                        {(firstName?.length <= 14?firstName:firstName?.substring(0,14)+"...")}
                     </Text>
-                <MdSettings cursor="pointer" onClick={(event)=>console.log("CLICK")} fontSize='25px'/>
+                </Box>
+                
+                <Menu>
+                    <MenuButton
+                        as={IconButton}
+                        aria-label="Options"
+                        icon={<MdSettings cursor="pointer" fontSize='25px'/>}
+                        bg={'transparent'}
+                        _hover={{
+                            background:"transparent"
+                        }}
+                        _expanded={{ bg: "transparent" }}
+                        _focus={{ boxShadow:"none"}}
+
+                        
+                    />
+                    <MenuList  
+                    p={0} minW="0"
+                    w={'100px'}
+                    mt={'-3'}
+                    ml={'3'}
+                    >
+                        <MenuItem onClick={()=>signout()} icon={<MdExitToApp fontSize='16px'/>}>
+                            Sair 
+                        </MenuItem>
+                    </MenuList>
+                </Menu>
+
+                
             </Box>
-            <Box  display="flex"
+            {/* <Box  display="flex"
                   alignItems="center"
                   justifyContent="center">
                 <Input variant="flushed" 
@@ -50,7 +80,7 @@ export const Header = (props) => {
                 
                 <BsFilterRight fontSize='28px'/>
                 
-            </Box>
+            </Box> */}
         </Box>
         
     );

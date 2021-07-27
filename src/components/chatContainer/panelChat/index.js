@@ -3,7 +3,7 @@ import { Box,Text} from '@chakra-ui/react'
 import { MessageBox } from './MessageBox';
 
 
-export const PanelChat = ({messages,supId}) => {
+export const PanelChat = ({messages}) => {
     
 
     const messagesEndRef = useRef(null)
@@ -31,7 +31,7 @@ export const PanelChat = ({messages,supId}) => {
         >
         {
         messages.map((m)=>
-                <MessageBox supId={supId} message={m}/>
+                <MessageBox message={m}/>
             )
         
         }

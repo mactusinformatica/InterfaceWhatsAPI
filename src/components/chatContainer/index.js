@@ -1,5 +1,7 @@
 import useSocket from '../../hooks/useSocket'
 import {useState, useEffect} from 'react'
+import useAuth from '../../hooks/useAuth';
+
 import { Box} from '@chakra-ui/react'
 import {HeaderChat} from './HeaderChat'
 import {InputChat} from './inputChat'
@@ -11,11 +13,11 @@ import getDateTime from '../../services/getDateTime'
 
 export const ChatContainer = ({active, setactive}) => {
     
-    //Temporário
-    const router = useRouter();
-    const supname = router.query.name? router.query.name:"genericName"
-    const supid = router.query.id?router.query.id:"genericID"
-    ///
+    const {user} = useAuth();
+    
+    const supname = user?.name
+    const supid = user?.id
+  
 
     const [messages,setMessages] = useState([
     ]);
@@ -43,7 +45,6 @@ export const ChatContainer = ({active, setactive}) => {
     )
     const socket = useSocket()
     useSocket("message",(message) => {
-        console.log(message)
         setMessages([...messages, message])
     })
 
@@ -88,8 +89,8 @@ export const ChatContainer = ({active, setactive}) => {
         <>
 
          <HeaderChat active={active} endCall={endCall} exitRoom={exitRoom}/>
-         <PanelChat supId={supid} messages={messages}/>
-         <InputChat active={active} supName={supname} supId={supid} socket={socket}/>
+         <PanelChat  messages={messages}/>
+         <InputChat active={active} socket={socket}/>
         </>
         :
         <InitialChat/>}

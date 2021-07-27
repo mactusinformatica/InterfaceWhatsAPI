@@ -47,7 +47,7 @@ export const Calls = ({title,setactive, calls}) => {
         var auxFilter = []
         if(filterPending && filterAnswering && filterFinished ){
             
-            console.log("IF 1")
+           
             auxFilter = calls.filter(
                 (i)=> i.status == "pending" || i.status == "answering" || i.status == "finished"
             )

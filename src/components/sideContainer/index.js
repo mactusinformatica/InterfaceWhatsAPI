@@ -2,14 +2,12 @@ import { useState, useEffect, useLayoutEffect } from 'react'
 import useSocket from '../../hooks/useSocket'
 import { Flex, useColorMode,Box } from '@chakra-ui/react'
 import {Header} from './Header'
-import {MyContacts} from './MyContacts'
 import  {Calls}from './Calls'
 import getDateTime from '../../services/getDateTime'
-import {useRouter} from 'next/router'
 
 export const SideContainer = (props) => {
 
-  
+
   const {colorMode} = useColorMode();
   const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   const color = { light: 'light.fontColor', dark: 'dark.fontColor' }
@@ -59,21 +57,7 @@ export const SideContainer = (props) => {
 
       
     })
-      //Temporário
-      const router = useRouter();
-      const supname = router.query.name? router.query.name:"genericName"
-      const supid = router.query.id?router.query.id:"genericID"
-      ///
-    async function joinRoom({id_room,name,channel,isSupport, schedule}){
-        
-    
-      await socket.emit("joinRoom", {id_sup: supid, id_room: id_room, name:name, channel: channel, schedule:schedule, date:dateTime.date, isSupport:isSupport})
-      
 
-  }
-  
-   
-  
   return (
     <Flex
       direction="column"
@@ -86,7 +70,7 @@ export const SideContainer = (props) => {
 
       {...props}>
         
-        <Header supname={supname}  />
+        <Header/>
         
         <Box id="scroll">
             {/* <MyContacts title={"MEUS ATENDIMENTOS"} key="1" setactive={props.setactive}/> */}

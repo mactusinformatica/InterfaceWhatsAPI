@@ -2,8 +2,6 @@ import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,
 import {ViewOffIcon , ViewIcon, WarningIcon} from '@chakra-ui/icons'
 import { useState, useEffect} from 'react';
 import useAuth from '../hooks/useAuth';
-import apiLogin from '../services/apiLogin'
-import axios from 'axios';
 
 const Login = ()=>{
 
@@ -25,9 +23,11 @@ const Login = ()=>{
 
     const submitLogin = async ()=>{
         setIsLoading(true);
-        await signin({email:email,password:password} ,setMessageSignin("Email ou senha inválida"))
+        const response = await signin({email:email,password:password});
         
-       
+        if(response==false){
+            setMessageSignin("Credenciais inválidas")
+        }
         setIsLoading(false);
     }
 
