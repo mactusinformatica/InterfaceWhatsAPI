@@ -7,56 +7,70 @@ import getDateTime from '../../services/getDateTime'
 
 export const SideContainer = (props) => {
 
-
+  const {socket, connectSocket} = useSocket();
   const {colorMode} = useColorMode();
   const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   const color = { light: 'light.fontColor', dark: 'dark.fontColor' }
   const [calls, setCalls] = useState([]);
   const dateTime = getDateTime()
 
-  const socket = useSocket('callList', calls => {
-    if(calls!=null){
-
-      setCalls(calls.reverse());
-      
-    }
-  })
-
-  useSocket('newCall', call => {
-    if(call!=null){
-
-      setCalls([call,...calls]);
-      
-    }
-  })
-  
-    useSocket("updateCallStatus",({id_room,supportName,schedule, status}) => {
-      var auxCalls = []
-      if(calls){
-        calls.map(
-          (c)=>{
-            if(c.id_room == id_room && c.schedule == schedule ){
-              auxCalls.push(
-                {
-                  channel: c.channel,
-                  date: c.date,
-                  id_room: c.id_room,
-                  name: c.name,
-                  schedule:c.schedule,
-                  status: status,
-                  supportName: supportName
-                })
-            }else{
-              auxCalls.push(c)
-            }
-          }
-        )
-        setCalls(auxCalls)
+  useEffect(
+    ()=>{
+      if(!socket){
+        connectSocket(process.env.NEXT_PUBLIC_SERVER_CHAT)
+      }else{
+        console.log(socket)
       }
+      
+      
+    },[socket])
+
+  // const socket = useSocket()
+
+  // useSocket('callList', calls => {
+    
+  //   if(calls!=null){
+
+  //     setCalls(calls.reverse());
+      
+  //   }
+  // })
+
+  // useSocket('newCall', call => {
+  //   if(call!=null){
+
+  //     setCalls([call,...calls]);
+      
+  //   }
+  // })
+  
+  //   useSocket("updateCallStatus",({id_room,supportName,schedule, status}) => {
+  //     var auxCalls = []
+  //     if(calls){
+  //       calls.map(
+  //         (c)=>{
+  //           if(c.id_room == id_room && c.schedule == schedule ){
+  //             auxCalls.push(
+  //               {
+  //                 channel: c.channel,
+  //                 date: c.date,
+  //                 id_room: c.id_room,
+  //                 name: c.name,
+  //                 schedule:c.schedule,
+  //                 status: status,
+  //                 supportName: supportName
+  //               })
+  //           }else{
+  //             auxCalls.push(c)
+  //           }
+  //         }
+  //       )
+  //       setCalls(auxCalls)
+  //     }
      
 
       
-    })
+  //   })
 
   return (
     <Flex

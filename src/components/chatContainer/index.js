@@ -45,6 +45,7 @@ export const ChatContainer = ({active, setactive}) => {
     )
     const socket = useSocket()
     useSocket("message",(message) => {
+        console.log(message)
         setMessages([...messages, message])
     })
 
@@ -78,9 +79,9 @@ export const ChatContainer = ({active, setactive}) => {
         height= "100%"
         width= "600px"
         bgPosition="center"
-        borderTop={"0px"}
+        boxShadow="2xl"
+        borderTop={"1px"}
         borderRight={"1px"}
-        borderLeft={"1px"}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"

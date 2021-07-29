@@ -9,11 +9,9 @@ export function AuthProvider({children}){
     const[user, setUser] = useState(null);
     const[loading, setLoading] = useState(true);
 
-    const isAuthenticated = !!user;
     useEffect(()=>{
         const {"macwhatsapi-auth": token} = parseCookies();
         if(token){
-            
             const decodeToken =  jwt_decode(token, {payload:true});
             var userObj = formatUser(decodeToken)
             setUser(userObj)
