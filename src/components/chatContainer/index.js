@@ -14,9 +14,12 @@ import getDateTime from '../../services/getDateTime'
 export const ChatContainer = ({active, setactive}) => {
     
     const {user} = useAuth();
-    
     const supname = user?.name
     const supid = user?.id
+
+    const {socket,socketEvent} = useSocket();
+
+    
   
 
     const [messages,setMessages] = useState([
@@ -38,18 +41,14 @@ export const ChatContainer = ({active, setactive}) => {
             )
             console.log(socket)
             }
-            return  () => {
-                socket.off()
-            }
         },[active]
     )
-    const socket = useSocket()
-    useSocket("message",(message) => {
-        console.log(message)
+
+    socketEvent("message",(message) => {
         setMessages([...messages, message])
     })
 
-    useSocket("previousMessages",(previousMessages) => {
+    socketEvent("previousMessages",(previousMessages) => {
             
         setMessages(previousMessages)
     })
@@ -77,7 +76,7 @@ export const ChatContainer = ({active, setactive}) => {
     return(
         <Box
         height= "100%"
-        width= "600px"
+        width= "900px"
         bgPosition="center"
         boxShadow="2xl"
         borderTop={"1px"}

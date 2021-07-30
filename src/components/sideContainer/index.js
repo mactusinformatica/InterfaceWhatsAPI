@@ -7,7 +7,7 @@ import getDateTime from '../../services/getDateTime'
 
 export const SideContainer = (props) => {
 
-  const {socket, connectSocket} = useSocket();
+  const {socket, connectSocket,socketEvent} = useSocket();
   const {colorMode} = useColorMode();
   const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   const color = { light: 'light.fontColor', dark: 'dark.fontColor' }
@@ -16,61 +16,52 @@ export const SideContainer = (props) => {
 
   useEffect(
     ()=>{
-      if(!socket){
-        connectSocket(process.env.NEXT_PUBLIC_SERVER_CHAT)
-      }else{
-        console.log(socket)
+      if(socket){
+        socket.emit("reqCallList")
       }
-      
-      
-    },[socket])
+    },[socket]);
 
-  // const socket = useSocket()
+  socketEvent('resCallList', calls => {
 
-  // useSocket('callList', calls => {
-    
-  //   if(calls!=null){
+    if(calls!=null){
 
-  //     setCalls(calls.reverse());
-      
-  //   }
-  // })
+      setCalls(calls.reverse());
 
-  // useSocket('newCall', call => {
-  //   if(call!=null){
+    }
+  })
 
-  //     setCalls([call,...calls]);
-      
-  //   }
-  // })
-  
-  //   useSocket("updateCallStatus",({id_room,supportName,schedule, status}) => {
-  //     var auxCalls = []
-  //     if(calls){
-  //       calls.map(
-  //         (c)=>{
-  //           if(c.id_room == id_room && c.schedule == schedule ){
-  //             auxCalls.push(
-  //               {
-  //                 channel: c.channel,
-  //                 date: c.date,
-  //                 id_room: c.id_room,
-  //                 name: c.name,
-  //                 schedule:c.schedule,
-  //                 status: status,
-  //                 supportName: supportName
-  //               })
-  //           }else{
-  //             auxCalls.push(c)
-  //           }
-  //         }
-  //       )
-  //       setCalls(auxCalls)
-  //     }
-     
+  socketEvent('newCall', call => {
+    if(call!=null){
 
-      
-  //   })
+      setCalls([call,...calls]);
+
+    }
+  })
+
+  socketEvent("updateCallStatus",({id_room,supportName,schedule, status}) => {
+      var auxCalls = []
+      if(calls){
+        calls.map(
+          (c)=>{
+            if(c.id_room == id_room && c.schedule == schedule ){
+              auxCalls.push(
+                {
+                  channel: c.channel,
+                  date: c.date,
+                  id_room: c.id_room,
+                  name: c.name,
+                  schedule:c.schedule,
+                  status: status,
+                  supportName: supportName
+                })
+            }else{
+              auxCalls.push(c)
+            }
+          }
+        )
+        setCalls(auxCalls)
+      }
+    })
 
   return (
     <Flex
@@ -81,17 +72,17 @@ export const SideContainer = (props) => {
       color={color[colorMode]}
       borderLeft="1px" borderColor={`${primaryColor[colorMode]}`}
 
-      
+
       {...props}>
-        
+
         <Header/>
-        
+
         <Box id="scroll">
             {/* <MyContacts title={"MEUS ATENDIMENTOS"} key="1" setactive={props.setactive}/> */}
             <Calls title={"GERAL"} calls={calls} key="1" setactive={props.setactive}/>
         </Box>
-       
-        
+
+
     </Flex>
   )
 }

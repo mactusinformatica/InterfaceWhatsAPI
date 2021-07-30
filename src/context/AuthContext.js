@@ -35,7 +35,8 @@ export function AuthProvider({children}){
         return {
             id: uId,
             name: uName,
-            token: uToken
+            token: uToken,
+            server_whatsapi: "http://localhost:5000"
             }
     }
 

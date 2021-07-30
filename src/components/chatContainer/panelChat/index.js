@@ -22,7 +22,7 @@ export const PanelChat = ({messages}) => {
         id="scroll"
         height="container.lg"
         width= "100%"
-        bgImage={`${process.env.NEXT_PUBLIC_HOST}/bgchat2.png`}
+        bgImage={`${process.env.NEXT_PUBLIC_HOST}/bgT.png`}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"

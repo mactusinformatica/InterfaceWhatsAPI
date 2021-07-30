@@ -62,8 +62,7 @@ const Login = ()=>{
                     MacWhatsAPI
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
-            height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}
-            >
+            height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
                      <img width={"60px"} src={`${process.env.NEXT_PUBLIC_HOST}/logo-mactus.png`}/>  
                      
                      {messageSignin?
