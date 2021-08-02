@@ -18,12 +18,11 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
 
     
     const {colorMode} = useColorMode();
-    const bgColor =  { light: 'light.background', dark: 'dark.background' }
-    const primaryColor =  { light: 'light.primary', dark: 'dark.primary' }
     const red =  { light: 'colorful.red', dark: 'colorful.red' }
     const blue =  { light: 'colorful.blue', dark: 'colorful.blue' }
     const fontColor =  { light: 'light.fontColor', dark: 'dark.fontColor' }
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' }
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     
 
@@ -38,16 +37,6 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
         justifyContent="space-between"
         alignItems="start">
             <Flex>
-                {/* <Box>
-                <Avatar  bg={primaryColor[colorMode]} 
-                        color={bgColor[colorMode]}
-                        fontSize={"25px"}
-                        size={"40px"}
-                        icon={<BsFillPersonFill />}
-                        width=""
-                        />
-                </Box> */}
-                
                 <Box display="flex"
                    
                     alignItems="center" >
@@ -58,25 +47,29 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
 
             <Flex alignItems="center" >
                 <Stack spacing={4} direction="row" align="center">
-                    <Button 
-                     size="sm"
-                     pl={"5px"}
-                     pr={"5px"}
-                     rightIcon={<IoMdPower fontSize="20px" style={{marginBottom:"2px" }} />} 
-                     bg={red[colorMode]}
-                     color={"#FFFFFF"}
-                     variant="solid" 
-                     fontSize="15px"
-                     onClick={onOpen}
-                     >
-                         FINALIZAR
-                    </Button>
+                    {active.status!="finished"?
+                        <Button 
+                        size="sm"
+                        pl={"5px"}
+                        pr={"5px"}
+                        rightIcon={<IoMdPower fontSize="20px" style={{marginBottom:"2px" }} />} 
+                        bg={red[colorMode]}
+                        color={"#FFFFFF"}
+                        variant="solid" 
+                        fontSize="15px"
+                        onClick={onOpen}
+                        >
+                            FINALIZAR
+                        </Button>
+                    :
+                        ''
+                    }
                     <Modal  isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
-                        <ModalContent p={4} width='max-content'>
+                        <ModalContent p={1} width='max-content'>
                             <ModalBody>
-                                <Text fontSize={"24px"}>
-                                    Tem certeza que deseja finalizar o atendimento?
+                                <Text color={fontColor[colorMode]} fontSize={"22px"}>
+                                    Deseja mesmo finalizar o atendimento?
                                 </Text>
                             </ModalBody>
                             <ModalFooter mr={20}>

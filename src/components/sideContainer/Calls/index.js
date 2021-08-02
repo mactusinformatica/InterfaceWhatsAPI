@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import {CallBox} from "./CallBox"
 import {HeaderCalls} from "./HeaderCalls"
 import { FilterCalls } from './FilterCalls';
-export const Calls = ({title,setactive, calls}) => {
+export const Calls = ({title, calls}) => {
     
 
     const [pending, setPending ]= useState(0);
@@ -129,7 +129,6 @@ export const Calls = ({title,setactive, calls}) => {
                             return (
                             <CallBox 
                             contact={c}
-                            setactive={setactive}
                             />
                             )}
                         )}

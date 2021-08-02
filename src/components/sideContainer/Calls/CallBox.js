@@ -2,9 +2,14 @@ import { Box, useColorMode,Text } from '@chakra-ui/react'
 import {Avatar} from '../../Avatar'
 import { BsFillPersonFill} from "react-icons/bs"
 import { FaWhatsapp, FaHeadset,FaPhone} from "react-icons/fa"
+import useChat from '../../../hooks/useChat'
+ 
 
 
-export const  CallBox = ({contact, setactive}) => {
+export const  CallBox = ({contact}) => {
+
+    const {setActive} = useChat();
+
     const {colorMode} = useColorMode();
     const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
     const bgColor = { light: 'light.background', dark: 'dark.background' }
@@ -22,9 +27,10 @@ export const  CallBox = ({contact, setactive}) => {
     
     const hoverSecondary = {light: 'light.hoverSecondary', dark: 'dark.hoverSecondary'}
 
+
     return(
         <Box
-        onClick={(e)=>setactive(contact)}
+        onClick={(e)=>setActive(contact)}
         color={fontColor[colorMode]} 
         height="max-content"
         bg={

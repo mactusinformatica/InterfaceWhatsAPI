@@ -87,7 +87,7 @@ export function AuthProvider({children}){
             
         }
         finally{
-            setUser(false);
+           // setUser(false);
             setLoading(false);
         }
     }

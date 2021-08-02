@@ -1,4 +1,5 @@
 import {parseCookies} from 'nookies'
+import {ChatProvider} from '../context/ChatContext'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
 import { ChatContainer } from '../components/chatContainer'
@@ -10,7 +11,7 @@ import useAuth from '../hooks/useAuth';
 import getDateTime from '../services/getDateTime'
 
 
-const Index = ({serverChat})=>{
+const Index = ()=>{
   
   const [active, setActive] = useState();
   const {user} = useAuth();
@@ -29,7 +30,7 @@ const Index = ({serverChat})=>{
   const makeCall = async ()=>{
     var dateTime = getDateTime()
   
-    await socket.emit("joinRoom", {id_room: "121241", name:"name", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    await socket.emit("joinRoom", {id_room: "456", name:"name2", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
   
   }
 
@@ -42,10 +43,10 @@ const Index = ({serverChat})=>{
       alignItems="inherit"
       justifyContent="center"
       height={"100%"}>
-          
-        <SideContainer setactive={setActive}  width='300px' height='100%'/>
-        <ChatContainer setactive={setActive} serverChat={serverChat} active={active} height='100%'/>
-      
+        <ChatProvider>
+          <SideContainer  width='300px' height='100%'/>
+          <ChatContainer height='100%'/>
+        </ChatProvider>
         <button onClick={(e)=>makeCall()}>
               Enviar
         </button>

@@ -1,4 +1,5 @@
 import useSocket from '../../hooks/useSocket'
+import useChat from '../../hooks/useChat'
 import {useState, useEffect} from 'react'
 import useAuth from '../../hooks/useAuth';
 
@@ -11,14 +12,14 @@ import io from "socket.io-client"
 import {useRouter} from 'next/router'
 import getDateTime from '../../services/getDateTime'
 
-export const ChatContainer = ({active, setactive}) => {
+export const ChatContainer = () => {
     
     const {user} = useAuth();
     const supname = user?.name
     const supid = user?.id
 
     const {socket,socketEvent} = useSocket();
-
+    const {active,setActive} = useChat();
     
   
 
@@ -33,10 +34,11 @@ export const ChatContainer = ({active, setactive}) => {
                 joinRoom({
                     id_room:active.id_room,
                     name:supname,
+                    status:active.status,
                     channel: active.channel,
                     schedule: active.schedule,
                     isSupport: true
-            }
+                }
             
             )
             console.log(socket)
@@ -53,23 +55,23 @@ export const ChatContainer = ({active, setactive}) => {
         setMessages(previousMessages)
     })
 
-    async function joinRoom({id_room,name,channel,isSupport, schedule}){
+    async function joinRoom({id_room,name,status,channel,isSupport, schedule}){
         
         
-        await socket.emit("joinRoom", {id_sup: supid, id_room: id_room, name:name, channel: channel, schedule:schedule, date:dateTime.date, schedule_current:dateTime.time, isSupport:isSupport})
+        await socket.emit("joinRoom", {id_sup: supid, id_room: id_room, name:name,status:status, channel: channel, schedule:schedule, date:dateTime.date, schedule_current:dateTime.time, isSupport:isSupport})
         
     }
     
     async function exitRoom({id_room, schedule_room}){
-        await socket.emit("exitRoom", {name_sup:supname,id_sup:supid, id_room:id_room,
-                         schedule_room:schedule_room, schedule:dateTime.time, channel:active.channel}, setactive(''))
+        await socket.emit("exitRoom", {name_sup:supname,id_sup:supid, id_room:id_room,status: active.status,
+        schedule_room:schedule_room, schedule:dateTime.time, channel:active.channel}, setActive(''))
         
     }
 
     async function endCall({id_room, schedule_room}){
         await socket.emit("endCall", {name_sup:supname,id_sup:supid, id_room:id_room, 
                           schedule_room:schedule_room, schedule_current:dateTime.time,  date:dateTime.date, channel:active.channel}
-        ,setactive(''))
+        ,setActive(''))
         
     }
 

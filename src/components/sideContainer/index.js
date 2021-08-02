@@ -79,7 +79,7 @@ export const SideContainer = (props) => {
 
         <Box id="scroll">
             {/* <MyContacts title={"MEUS ATENDIMENTOS"} key="1" setactive={props.setactive}/> */}
-            <Calls title={"GERAL"} calls={calls} key="1" setactive={props.setactive}/>
+            <Calls title={"GERAL"} calls={calls} key="1"/>
         </Box>
 
 
