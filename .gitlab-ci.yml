@@ -36,7 +36,8 @@ node:
   stage: node
   image: node:lts-slim
   script:
-    - npm install
+    - yarn install
+    - yarn build
   artifacts:
     paths:
       - ./
