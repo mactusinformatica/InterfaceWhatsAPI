@@ -3,9 +3,19 @@ variables:
   NAME: "interface-whatsapi"
   DIR_PATH: "/home/docker/"
 stages:
+  - logs
   - init_project
   - node
   - deploy
+
+logs:
+  stage: logs
+  script:
+    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
+    - docker logs $NAME
+  when: manual
+  only:
+    - master
 
 init_project:
   variables:
