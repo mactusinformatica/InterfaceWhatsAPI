@@ -4,6 +4,7 @@ variables:
   DIR_PATH: "/home/docker/"
 stages:
   - init_project
+  - node
   - deploy
 
 init_project:
@@ -20,3 +21,27 @@ init_project:
   when: manual
   only:
     - master
+
+node:
+  stage: node
+  image: node:lts-slim
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - ./
+    expire_in: 1 week
+
+deploy:
+  variables:
+    NAME: "interface-whatsapi"
+    DIR_PATH: "/home/docker/"
+  stage: deploy
+  script:
+    - cp -apr ./ $DIR_PATH/$NAME/node/
+    - docker restart $NAME
+  artifacts:
+    paths:
+      - ./
+  when: manual
+
