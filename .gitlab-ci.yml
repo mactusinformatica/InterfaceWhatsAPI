@@ -1,0 +1,58 @@
+image: docker:stable
+variables:
+  NAME: "interface-whatsapi"
+  DIR_PATH: "/home/docker/"
+stages:
+  - logs
+  - init_project
+  - node
+  - deploy
+
+logs:
+  stage: logs
+  script:
+    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
+    - docker logs $NAME
+  when: manual
+  only:
+    - master
+
+init_project:
+  variables:
+    NEXT_PUBLIC_HOST: "https://chat.mactus.online"
+    NEXT_PUBLIC_SERVER_CHAT: "https://maringa1.mactus.online/receive"
+    NEXT_PUBLIC_API_FINANCEIRO: "https://macfinanceiro.mactus.com.br/api/APILogin.php"
+  stage: init_project
+  script:
+    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
+    - docker rm -f $NAME || true
+    - docker pull docker.mactus.com.br:5000/dockers/node-lts:latest
+    - docker run -d --name $NAME -p 127.0.0.1:3000:3000 --restart always -v $DIR_PATH/$NAME/node:/app -v /etc/localtime:/etc/localtime -e NEXT_PUBLIC_SERVER_CHAT="$NEXT_PUBLIC_SERVER_CHAT" -e NEXT_PUBLIC_HOST="$NEXT_PUBLIC_HOST" -e NEXT_PUBLIC_API_FINANCEIRO="$NEXT_PUBLIC_API_FINANCEIRO" --link server-whatsapi:server-whatsapi docker.mactus.com.br:5000/dockers/node-lts:latest
+  when: manual
+  only:
+    - master
+
+node:
+  stage: node
+  image: node:lts-slim
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - ./
+    expire_in: 1 week
+
+deploy:
+  variables:
+    NAME: "interface-whatsapi"
+    DIR_PATH: "/home/docker/"
+  stage: deploy
+  script:
+    - cp -apr ./ $DIR_PATH/$NAME/node/
+    - docker restart $NAME
+  artifacts:
+    paths:
+      - ./
+  when: manual
+
