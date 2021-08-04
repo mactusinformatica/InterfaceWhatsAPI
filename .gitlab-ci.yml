@@ -19,9 +19,9 @@ logs:
 
 init_project:
   variables:
-  HOST: https://chat.mactus.online
-  SERVER_CHAT: https://maringa1.mactus.online
-  API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
+    HOST: https://chat.mactus.online
+    SERVER_CHAT: https://maringa1.mactus.online
+    API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
   stage: init_project
   script:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
