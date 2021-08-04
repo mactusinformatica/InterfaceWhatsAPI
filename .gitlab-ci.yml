@@ -42,7 +42,7 @@ node:
     paths:
       - ./
     expire_in: 1 week
-
+  when: manual
 deploy:
   variables:
     NAME: "interface-whatsapi"
