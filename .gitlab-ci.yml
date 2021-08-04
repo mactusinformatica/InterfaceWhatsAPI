@@ -26,8 +26,8 @@ init_project:
   script:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
     - docker rm -f $NAME || true
-    - docker pull docker.mactus.com.br:5000/dockers/node-lts:latest
-    - docker run -d --name $NAME -p 127.0.0.1:3000:3000 --restart always -v $DIR_PATH/$NAME/node:/app -v /etc/localtime:/etc/localtime -e NEXT_PUBLIC_SERVER_CHAT="$NEXT_PUBLIC_SERVER_CHAT" -e NEXT_PUBLIC_HOST="$NEXT_PUBLIC_HOST" -e NEXT_PUBLIC_API_FINANCEIRO="$NEXT_PUBLIC_API_FINANCEIRO" --link server-whatsapi:server-whatsapi docker.mactus.com.br:5000/dockers/node-lts:latest
+    - docker build . -t $NAME
+    - docker run -d --name $NAME -p 127.0.0.1:3000:3000 --restart always -e NEXT_PUBLIC_SERVER_CHAT="$NEXT_PUBLIC_SERVER_CHAT" -e 'NEXT_PUBLIC_HOST="$NEXT_PUBLIC_HOST" -e NEXT_PUBLIC_API_FINANCEIRO="$NEXT_PUBLIC_API_FINANCEIRO" $NAME 
   when: manual
   only:
     - master
