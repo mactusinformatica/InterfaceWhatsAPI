@@ -73,7 +73,7 @@ export function AuthProvider({children}){
                 
             })
             .catch(function (error) {
-                console.log("error.data: ", error.data )
+                console.log("error: ", error )
                 setUser(error.data);
             });
             return response;
