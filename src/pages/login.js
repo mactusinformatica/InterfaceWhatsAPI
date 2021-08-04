@@ -24,6 +24,7 @@ const Login = ()=>{
 
     const submitLogin = async ()=>{
         setIsLoading(true);
+        console.log("SUBMIT SIGNIN")
         const response = await signin({email:email,password:password});
         
         if(response==false){
