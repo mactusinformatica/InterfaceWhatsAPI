@@ -49,7 +49,7 @@ export function AuthProvider({children}){
             const formData = new FormData();
             formData.append('email',email);
             formData.append('senha',password);
-        
+            console.log(publicRuntimeConfig)
             var config = {
                 method: 'post',
                 url: publicRuntimeConfig.NEXT_PUBLIC_API_FINANCEIRO,
