@@ -1,3 +1,5 @@
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 import Router from "next/router";
 import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
@@ -31,7 +33,7 @@ export function AuthProvider({children}){
              uName = user.name.split(" ")[0]
              uToken = user.token
         }
-
+        
         return {
             id: uId,
             name: uName,
@@ -50,7 +52,7 @@ export function AuthProvider({children}){
         
             var config = {
                 method: 'post',
-                url: process.env.NEXT_PUBLIC_API_FINANCEIRO,
+                url: publicRuntimeConfig.NEXT_PUBLIC_API_FINANCEIRO,
                 data : formData
             };
             const response = await axios(config).then(async function (res) {

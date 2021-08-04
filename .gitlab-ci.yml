@@ -18,12 +18,16 @@ logs:
     - master
 
 init_project:
+  variables:
+  HOST: https://chat.mactus.online
+  SERVER_CHAT: https://maringa1.mactus.online
+  API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
   stage: init_project
   script:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
     - docker rm -f $NAME || true
     - docker build . -t $NAME
-    - docker run -d --name interface-whatsapi  -p 127.0.0.1:3000:3000 --restart always interface-whatsapi 
+    - docker run -d --name interface-whatsapi --env NEXT_PUBLIC_HOST=$HOST --env NEXT_PUBLIC_SERVER_CHAT=$SERVER_CHAT --env NEXT_PUBLIC_API_FINANCEIRO=$API_FINANCEIRO -p 127.0.0.1:3000:3000 --restart always interface-whatsapi 
   when: manual
   only:
     - master

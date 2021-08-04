@@ -1,3 +1,5 @@
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 import { Box, useColorMode,Text } from '@chakra-ui/react'
 import {Avatar} from '../../Avatar'
 import { BsFillPersonFill} from "react-icons/bs"
@@ -116,7 +118,7 @@ export const  CallBox = ({contact}) => {
             {contact.channel=="whatsapp"?
             <FaWhatsapp fontSize="30px" color="#128C7E"/>
             :
-            <img width={"30px"} src={`${process.env.NEXT_PUBLIC_HOST}/sri.png`}/>
+            <img width={"30px"} src={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/sri.png`}/>
             }
              <Text fontWeight="bold" fontSize="12px">
              {contact.schedule}

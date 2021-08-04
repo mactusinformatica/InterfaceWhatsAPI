@@ -1,3 +1,5 @@
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 import { useEffect, useRef } from 'react';
 import { Box,Text} from '@chakra-ui/react'
 import { MessageBox } from './MessageBox';
@@ -22,7 +24,7 @@ export const PanelChat = ({messages}) => {
         id="scroll"
         height="container.lg"
         width= "100%"
-        bgImage={`${process.env.NEXT_PUBLIC_HOST}/bgT.png`}
+        bgImage={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/bgT.png`}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"

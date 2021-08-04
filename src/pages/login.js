@@ -1,3 +1,5 @@
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,Alert } from '@chakra-ui/react'
 import {ViewOffIcon , ViewIcon, WarningIcon} from '@chakra-ui/icons'
 import { useState, useEffect} from 'react';
@@ -64,7 +66,7 @@ const Login = ()=>{
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
-                     <img width={"60px"} src={`${process.env.NEXT_PUBLIC_HOST}/logo-mactus.png`}/>  
+                     <img width={"60px"} src={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/logo-mactus.png`}/>  
                      
                      {messageSignin?
                         <Box marginBottom={"5px"} display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}  borderRadius={"7px"} p={1} bg={red03[colorMode]}
