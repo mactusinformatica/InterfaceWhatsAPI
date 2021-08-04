@@ -41,6 +41,7 @@ export function AuthProvider({children}){
     }
 
     const signin = async ({email,password})=>{
+        console.log("Email - Password: ",email,password)
         setLoading(true);
         try{
             const formData = new FormData();
@@ -66,11 +67,13 @@ export function AuthProvider({children}){
                     
                     Router.push('/');
                 }else{
+                    console.log("SUBMIT ERROR: ",res.data.erro )
                     return false;
                 }
                 
             })
             .catch(function (error) {
+                console.log("error.data: ", error.data )
                 setUser(error.data);
             });
             return response;
