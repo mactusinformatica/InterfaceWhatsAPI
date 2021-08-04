@@ -34,7 +34,7 @@ init_project:
 
 node:
   stage: node
-  image: node:lts-slim
+  image: node:alpine
   script:
     - yarn install
     - yarn build
