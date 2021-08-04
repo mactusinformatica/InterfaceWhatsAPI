@@ -1,3 +1,4 @@
+import useAuth from '../../../hooks/useAuth';
 import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 import { useEffect, useRef } from 'react';
@@ -7,7 +8,7 @@ import { MessageBox } from './MessageBox';
 
 export const PanelChat = ({messages}) => {
     
-
+    const {host} = useAuth();
     const messagesEndRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -24,7 +25,7 @@ export const PanelChat = ({messages}) => {
         id="scroll"
         height="container.lg"
         width= "100%"
-        bgImage={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/bgT.png`}
+        bgImage={`${host}/bgT.png`}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"

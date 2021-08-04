@@ -1,5 +1,3 @@
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
 import Router from "next/router";
 import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
@@ -9,6 +7,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({children}){
     const[user, setUser] = useState(null);
+    const[host,setHost] = useState(null);
     const[loading, setLoading] = useState(true);
 
     useEffect(()=>{
@@ -42,17 +41,17 @@ export function AuthProvider({children}){
             }
     }
 
-    const signin = async ({email,password})=>{
+    const signin = async ({email,password, apiFinanceiro})=>{
+        console.log(apiFinanceiro)
         console.log("Email - Password: ",email,password)
         setLoading(true);
         try{
             const formData = new FormData();
             formData.append('email',email);
             formData.append('senha',password);
-            console.log(publicRuntimeConfig)
             var config = {
                 method: 'post',
-                url: publicRuntimeConfig.NEXT_PUBLIC_API_FINANCEIRO,
+                url: apiFinanceiro,
                 data : formData
             };
             const response = await axios(config).then(async function (res) {
@@ -99,6 +98,7 @@ export function AuthProvider({children}){
 
     return <AuthContext.Provider value={{
         user,
+        setHost,
         signin,
         signout,
         loading

@@ -6,7 +6,7 @@ import { useState, useEffect} from 'react';
 import useAuth from '../hooks/useAuth';
 import {parseCookies} from 'nookies'
 
-const Login = ()=>{
+const Login = ({urlHost, apiFinanceiro})=>{
 
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -22,12 +22,14 @@ const Login = ()=>{
     const red = { light: 'colorful.red', dark: 'colorful.red' }
 
 
-    const {user, signin,loading} = useAuth();
+    const {user, signin,host,setHost} = useAuth();
+    setHost(urlHost)
 
     const submitLogin = async ()=>{
+        console.log()
         setIsLoading(true);
         console.log("SUBMIT SIGNIN")
-        const response = await signin({email:email,password:password});
+        const response = await signin({email:email,password:password, apiFinanceiro});
         
         if(response==false){
             setMessageSignin("Credenciais inválidas")
@@ -66,7 +68,7 @@ const Login = ()=>{
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
-                     <img width={"60px"} src={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/logo-mactus.png`}/>  
+                     <img width={"60px"} src={`${urlHost}/logo-mactus.png`}/>  
                      
                      {messageSignin?
                         <Box marginBottom={"5px"} display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}  borderRadius={"7px"} p={1} bg={red03[colorMode]}
@@ -135,7 +137,10 @@ export const getServerSideProps = async(ctx)=>{
       }
     }
     return {
-      props: {}
+      props: {
+        urlHost: publicRuntimeConfig.NEXT_PUBLIC_HOST,
+        apiFinanceiro: publicRuntimeConfig.NEXT_PUBLIC_API_FINANCEIRO  
+      }
     }
   }
 

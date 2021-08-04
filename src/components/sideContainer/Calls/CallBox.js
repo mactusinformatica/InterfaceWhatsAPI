@@ -5,12 +5,13 @@ import {Avatar} from '../../Avatar'
 import { BsFillPersonFill} from "react-icons/bs"
 import { FaWhatsapp, FaHeadset,FaPhone} from "react-icons/fa"
 import useChat from '../../../hooks/useChat'
- 
+import useAuth from '../../../hooks/useAuth'
 
 
 export const  CallBox = ({contact}) => {
 
     const {setActive} = useChat();
+    const {host} = useAuth();
 
     const {colorMode} = useColorMode();
     const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
@@ -118,7 +119,7 @@ export const  CallBox = ({contact}) => {
             {contact.channel=="whatsapp"?
             <FaWhatsapp fontSize="30px" color="#128C7E"/>
             :
-            <img width={"30px"} src={`${publicRuntimeConfig.NEXT_PUBLIC_HOST}/sri.png`}/>
+            <img width={"30px"} src={`${host}/sri.png`}/>
             }
              <Text fontWeight="bold" fontSize="12px">
              {contact.schedule}
