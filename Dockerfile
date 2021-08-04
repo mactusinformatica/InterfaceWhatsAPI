@@ -8,6 +8,13 @@ RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
+
+ARG HOST
+ENV NEXT_PUBLIC_HOST=$HOST
+
+ARG API_FINANCEIRO
+ENV NEXT_PUBLIC_API_FINANCEIRO=$API_FINANCEIRO
+
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
