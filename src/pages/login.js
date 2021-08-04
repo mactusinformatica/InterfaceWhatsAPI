@@ -62,7 +62,7 @@ const Login = ()=>{
                 
             }}
              p={1} borderBottom="2px" color={bgColor[colorMode]} fontFamily="Otomanopee One" fontSize={"4xl"}marginBottom={"15px"}>
-                    MacWhatsAPI
+                    MacWhatsAPI!
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
