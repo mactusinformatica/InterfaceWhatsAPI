@@ -5,13 +5,6 @@ export function ChatProvider({children}){
 
     const [active,setActive] = useState();
 
-    useEffect(
-        ()=>{
-            console.log(active)
-        },[active]
-    )
-
-
     return <ChatContext.Provider value={{
         active,
         setActive

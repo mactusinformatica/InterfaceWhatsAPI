@@ -1,11 +1,13 @@
 
 import {useState, useEffect} from 'react'
 import useAuth from '../../../hooks/useAuth';
-import { Box, useColorMode,Text} from '@chakra-ui/react'
+import { Box, useColorMode,Text,useDisclosure,Popover,PopoverBody,PopoverContent,PopoverTrigger} from '@chakra-ui/react'
 import { AttachmentIcon} from '@chakra-ui/icons'
 import { BsFillMicFill} from "react-icons/bs"
 import { IoSend} from "react-icons/io5"
-import {ButtonInput} from './buttonInput'
+import {BtnSend} from './btnSend'
+import {BtnAttach} from './btnAttach'
+
 import getDateTime from '../../../services/getDateTime'
 
 
@@ -16,12 +18,10 @@ export const InputChat = ({active, socket}) => {
     const {colorMode} = useColorMode();
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' }
     const fontColor =  { light: 'light.fontColor', dark: 'dark.fontColor' }
-
+    const { isOpen, onToggle } = useDisclosure()
 
     function sendMessage(){
         var dateTime = getDateTime()
-        
-
         if(text!=""){
            
             socket.emit('chat-message',
@@ -39,8 +39,6 @@ export const InputChat = ({active, socket}) => {
 
         setText('')
         }
-        
-        
     };
 
     return(
@@ -53,6 +51,7 @@ export const InputChat = ({active, socket}) => {
         justifyContent="space-around"
         alignItems="center"
         >
+
         {
             active.status=="finished"?
             
@@ -60,8 +59,8 @@ export const InputChat = ({active, socket}) => {
                 ATENDIMENTO JÁ FINALIZADO
             </Text>
             :
-            <>
-            {/* <ButtonInput event={setText} icon={<AttachmentIcon  fontSize={"25px"}/>} /> */}
+             <>
+               <BtnAttach user={user} active={active} socket={socket}/>
                 <Box width="85%" pt={"5px"}>    
                 <textarea
                 onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}
@@ -87,11 +86,11 @@ export const InputChat = ({active, socket}) => {
                 </Box>
                 {
                 text?
-                <ButtonInput 
+                <BtnSend
                 mr={"10px"} event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
                 :
                 // <ButtonInput event={sendMessages} icon={<BsFillMicFill  fontSize={"25px"}/>} />
-                <ButtonInput event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
+                <BtnSend event={sendMessage} icon={<IoSend  fontSize={"25px"}/>} />
                 }
             </>
     }

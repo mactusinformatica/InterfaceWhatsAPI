@@ -1,10 +1,10 @@
 import { Box} from '@chakra-ui/react'
 
-export const ButtonInput = ({icon,event}) => {
+export const BtnSend = ({icon,event}) => {
 
     return(
         <Box 
-        onClick={(e)=>event()}
+        onClick={event?(e)=>event():null}
         cursor={"pointer"} bg={"#FFFFFF"} 
         marginBottom={"10px"} 
         borderRadius="30px" 
