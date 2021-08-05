@@ -20,11 +20,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
     const red = { light: 'colorful.red', dark: 'colorful.red' }
 
 
-    const {signin,host,setHost} = useAuth();
-    
-    useEffect(()=>{
-        setHost(urlHost)
-    },[])
+    const {signin} = useAuth();
 
     const submitLogin = async ()=>{
         setIsLoading(true);
