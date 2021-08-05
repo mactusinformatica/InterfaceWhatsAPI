@@ -1,5 +1,3 @@
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
 import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,Alert } from '@chakra-ui/react'
 import {ViewOffIcon , ViewIcon, WarningIcon} from '@chakra-ui/icons'
 import { useState, useEffect} from 'react';
@@ -22,13 +20,14 @@ const Login = ({urlHost, apiFinanceiro})=>{
     const red = { light: 'colorful.red', dark: 'colorful.red' }
 
 
-    const {user, signin,host,setHost} = useAuth();
-    setHost(urlHost)
+    const {signin,host,setHost} = useAuth();
+    
+    useEffect(()=>{
+        setHost(urlHost)
+    },[])
 
     const submitLogin = async ()=>{
-        console.log(urlHost, apiFinanceiro)
         setIsLoading(true);
-        console.log("SUBMIT SIGNIN")
         const response = await signin({email:email,password:password, apiFinanceiro});
         
         if(response==false){
@@ -36,8 +35,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
         }
         setIsLoading(false);
     }
-
-
+    
     useEffect(() => {
         
 
@@ -64,11 +62,11 @@ const Login = ({urlHost, apiFinanceiro})=>{
                 
             }}
              p={1} borderBottom="2px" color={bgColor[colorMode]} fontFamily="Otomanopee One" fontSize={"4xl"}marginBottom={"15px"}>
-                    MacWhatsAPI!!
+                    MacWhatsAPI!
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
-                     <img width={"60px"} src={`${urlHost}/logo-mactus.png`}/>  
+                     <img width={"60px"} src={`${host}/logo-mactus.png`}/>  
                      
                      {messageSignin?
                         <Box marginBottom={"5px"} display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}  borderRadius={"7px"} p={1} bg={red03[colorMode]}

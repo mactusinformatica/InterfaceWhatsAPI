@@ -1,5 +1,3 @@
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
 import { Box, useColorMode,Text } from '@chakra-ui/react'
 import {Avatar} from '../../Avatar'
 import { BsFillPersonFill} from "react-icons/bs"
@@ -8,10 +6,9 @@ import useChat from '../../../hooks/useChat'
 import useAuth from '../../../hooks/useAuth'
 
 
-export const  CallBox = ({contact}) => {
+export const  CallBox = ({contact,urlHost}) => {
 
     const {setActive} = useChat();
-    const {host} = useAuth();
 
     const {colorMode} = useColorMode();
     const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
@@ -119,7 +116,7 @@ export const  CallBox = ({contact}) => {
             {contact.channel=="whatsapp"?
             <FaWhatsapp fontSize="30px" color="#128C7E"/>
             :
-            <img width={"30px"} src={`${host}/sri.png`}/>
+            <img width={"30px"} src={`${urlHost}/sri.png`}/>
             }
              <Text fontWeight="bold" fontSize="12px">
              {contact.schedule}

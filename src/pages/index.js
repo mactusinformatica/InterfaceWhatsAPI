@@ -11,7 +11,7 @@ import useAuth from '../hooks/useAuth';
 import getDateTime from '../services/getDateTime'
 
 
-const Index = ()=>{
+const Index = ({urlHost, apiFinanceiro})=>{
   
   const [active, setActive] = useState();
   const {user} = useAuth();
@@ -44,8 +44,15 @@ const Index = ()=>{
       justifyContent="center"
       height={"100%"}>
         <ChatProvider>
-          <SideContainer  width='300px' height='100%'/>
-          <ChatContainer height='100%'/>
+          {
+          socket?
+            <>
+              <SideContainer urlHost = {urlHost}  width='300px' height='100%'/>
+              <ChatContainer urlHost = {urlHost} height='100%'/>
+            </>
+          :
+            ''
+          }
         </ChatProvider>
         <button onClick={(e)=>makeCall()}>
               Enviar
@@ -72,7 +79,10 @@ export const getServerSideProps = async(ctx)=>{
     }
   }
   return {
-    props: {}
+    props: {
+      urlHost: process.env.NEXT_PUBLIC_HOST,
+      apiFinanceiro: process.env.NEXT_PUBLIC_API_FINANCEIRO  
+    }
   }
 }
 

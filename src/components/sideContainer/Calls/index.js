@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import {CallBox} from "./CallBox"
 import {HeaderCalls} from "./HeaderCalls"
 import { FilterCalls } from './FilterCalls';
-export const Calls = ({title, calls}) => {
+export const Calls = ({title, calls,urlHost}) => {
     
 
     const [pending, setPending ]= useState(0);

@@ -10,10 +10,10 @@ RUN yarn install --frozen-lockfile
 FROM node:alpine AS builder
 
 ARG HOST
-ENV NEXT_PUBLIC_HOST=https://chat.mactus.online
+ENV NEXT_PUBLIC_HOST=$HOST
 
 ARG API_FINANCEIRO
-ENV NEXT_PUBLIC_API_FINANCEIRO=https://macfinanceiro.mactus.com.br/api/APILogin.php
+ENV NEXT_PUBLIC_API_FINANCEIRO=$API_FINANCEIRO
 
 WORKDIR /app
 COPY . .

@@ -11,7 +11,6 @@ export const BtnAttach = ({user,active,socket})=>{
     
     function sendPhoto(e){
         var dateTime = getDateTime()
-        console.log(e.target.files[0])
            
         // const reader = new FileReader();
         // reader.onload = function() {

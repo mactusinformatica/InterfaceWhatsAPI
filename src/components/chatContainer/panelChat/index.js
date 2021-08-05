@@ -1,14 +1,11 @@
 import useAuth from '../../../hooks/useAuth';
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
 import { useEffect, useRef } from 'react';
 import { Box,Text} from '@chakra-ui/react'
 import { MessageBox } from './MessageBox';
 
 
-export const PanelChat = ({messages}) => {
-    
-    const {host} = useAuth();
+export const PanelChat = ({messages,urlHost}) => {
+
     const messagesEndRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -16,7 +13,7 @@ export const PanelChat = ({messages}) => {
     }
 
     useEffect(scrollToBottom, [messages]);
-
+   
 
 
    
@@ -25,7 +22,7 @@ export const PanelChat = ({messages}) => {
         id="scroll"
         height="container.lg"
         width= "100%"
-        bgImage={`${host}/bgT.png`}
+        bgImage={`${urlHost}/bgT.png`}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"

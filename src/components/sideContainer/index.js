@@ -7,7 +7,7 @@ import getDateTime from '../../services/getDateTime'
 
 export const SideContainer = (props) => {
 
-  const {socket, connectSocket,socketEvent} = useSocket();
+  const {socket,socketEvent} = useSocket();
   const {colorMode} = useColorMode();
   const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   const color = { light: 'light.fontColor', dark: 'dark.fontColor' }
@@ -20,7 +20,6 @@ export const SideContainer = (props) => {
         socket.emit("reqCallList")
       }
     },[socket]);
-
   socketEvent('resCallList', calls => {
 
     if(calls!=null){
@@ -79,7 +78,7 @@ export const SideContainer = (props) => {
 
         <Box id="scroll">
             {/* <MyContacts title={"MEUS ATENDIMENTOS"} key="1" setactive={props.setactive}/> */}
-            <Calls title={"GERAL"} calls={calls} key="1"/>
+            <Calls urlHost={props.urlHost} title={"GERAL"} calls={calls} key="1"/>
         </Box>
 
 

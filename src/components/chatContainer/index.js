@@ -12,7 +12,7 @@ import io from "socket.io-client"
 import {useRouter} from 'next/router'
 import getDateTime from '../../services/getDateTime'
 
-export const ChatContainer = () => {
+export const ChatContainer = ({urlHost}) => {
     
     const {user} = useAuth();
     const supname = user?.name
@@ -23,8 +23,7 @@ export const ChatContainer = () => {
     
   
 
-    const [messages,setMessages] = useState([
-    ]);
+    const [messages,setMessages] = useState([]);
 
     const dateTime = getDateTime()
    
@@ -39,9 +38,8 @@ export const ChatContainer = () => {
                     schedule: active.schedule,
                     isSupport: true
                 }
-            
             )
-            console.log(socket)
+            
             }
         },[active]
     )
@@ -91,11 +89,11 @@ export const ChatContainer = () => {
         <>
 
          <HeaderChat active={active} endCall={endCall} exitRoom={exitRoom}/>
-         <PanelChat  messages={messages}/>
+         <PanelChat urlHost={urlHost} messages={messages}/>
          <InputChat active={active} socket={socket}/>
         </>
         :
-        <InitialChat/>}
+        <InitialChat urlHost={urlHost} />}
      
         </Box>
     );
