@@ -26,7 +26,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
     setHost(urlHost)
 
     const submitLogin = async ()=>{
-        console.log()
+        console.log(urlHost, apiFinanceiro)
         setIsLoading(true);
         console.log("SUBMIT SIGNIN")
         const response = await signin({email:email,password:password, apiFinanceiro});
@@ -64,7 +64,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
                 
             }}
              p={1} borderBottom="2px" color={bgColor[colorMode]} fontFamily="Otomanopee One" fontSize={"4xl"}marginBottom={"15px"}>
-                    MacWhatsAPI!
+                    MacWhatsAPI!!
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
@@ -137,9 +137,10 @@ export const getServerSideProps = async(ctx)=>{
       }
     }
     return {
+        
       props: {
-        urlHost: publicRuntimeConfig.NEXT_PUBLIC_HOST,
-        apiFinanceiro: publicRuntimeConfig.NEXT_PUBLIC_API_FINANCEIRO  
+        urlHost: process.env.NEXT_PUBLIC_HOST,
+        apiFinanceiro: process.env.NEXT_PUBLIC_API_FINANCEIRO  
       }
     }
   }
