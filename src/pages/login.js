@@ -62,7 +62,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
             </Text>
             <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
-                     <img width={"60px"} src={`${host}/logo-mactus.png`}/>  
+                     <img width={"60px"} src={`${urlHost}/logo-mactus.png`}/>  
                      
                      {messageSignin?
                         <Box marginBottom={"5px"} display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}  borderRadius={"7px"} p={1} bg={red03[colorMode]}

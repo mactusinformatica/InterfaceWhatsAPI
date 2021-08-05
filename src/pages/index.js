@@ -3,7 +3,7 @@ import {ChatProvider} from '../context/ChatContext'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
 import { ChatContainer } from '../components/chatContainer'
-import { Flex} from '@chakra-ui/react'
+import { Flex, Progress} from '@chakra-ui/react'
 import{useState,useEffect} from 'react'
 import useSocket from '../hooks/useSocket'
 import useAuth from '../hooks/useAuth';
@@ -11,9 +11,8 @@ import useAuth from '../hooks/useAuth';
 import getDateTime from '../services/getDateTime'
 
 
-const Index = ({urlHost, apiFinanceiro})=>{
-  
-  const [active, setActive] = useState();
+const Index = ({urlHost})=>{
+
   const {user} = useAuth();
   const {socket, connectSocket} = useSocket();
 
@@ -45,13 +44,13 @@ const Index = ({urlHost, apiFinanceiro})=>{
       height={"100%"}>
         <ChatProvider>
           {
-          socket?
+          user && socket?
             <>
               <SideContainer urlHost = {urlHost}  width='300px' height='100%'/>
               <ChatContainer urlHost = {urlHost} height='100%'/>
             </>
           :
-            ''
+          <Progress size="xs" isIndeterminate />
           }
         </ChatProvider>
         <button onClick={(e)=>makeCall()}>

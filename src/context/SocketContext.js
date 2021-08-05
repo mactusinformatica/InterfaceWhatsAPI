@@ -9,7 +9,6 @@ export function SocketProvider({children}){
     const[socket, setSocket] = useState(null);
 
     const connectSocket = (url)=>{
-        console.log("connectSocket")
         setSocket(io(url))
     }
 
