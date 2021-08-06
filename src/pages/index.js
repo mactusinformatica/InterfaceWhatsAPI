@@ -3,7 +3,7 @@ import {ChatProvider} from '../context/ChatContext'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
 import { ChatContainer } from '../components/chatContainer'
-import { Flex, Progress} from '@chakra-ui/react'
+import { Flex, Progress, Box} from '@chakra-ui/react'
 import{useState,useEffect} from 'react'
 import useSocket from '../hooks/useSocket'
 import useAuth from '../hooks/useAuth';
@@ -29,9 +29,25 @@ const Index = ({urlHost})=>{
   const makeCall = async ()=>{
     var dateTime = getDateTime()
   
-    await socket.emit("joinRoom", {id_room: "456", name:"name2", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    await socket.emit("joinRoom", {id_room: "123", name:"name1", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
   
   }
+
+  function sendMessage(){
+    var dateTime = getDateTime()  
+    socket.emit('chat-message',
+    {
+        id_author:"4",
+        content:"#TEST#",
+        type:"text",
+        room:"123",
+        name_author:"tester",
+        schedule_message: dateTime.time,
+        channel: "whatsapp",
+        isSupport: false,
+    }
+    )
+};
 
   return(
     <Container height="100vh">
@@ -53,10 +69,15 @@ const Index = ({urlHost})=>{
           <Progress size="xs" isIndeterminate />
           }
         </ChatProvider>
-        <button onClick={(e)=>makeCall()}>
-              Enviar
-        </button>
-
+        <Box>
+          <button onClick={(e)=>makeCall()}>
+                Atendimento
+          </button>
+          <button onClick={(e)=>sendMessage()}>
+                Mensagem
+          </button>
+        </Box>
+        
       </Flex>
           
     </Container>

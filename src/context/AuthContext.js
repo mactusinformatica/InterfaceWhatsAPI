@@ -26,9 +26,12 @@ export function AuthProvider({children}){
                         name: res.data.name.split(" ")[0],
                         id: res.data.id,
                         token: res.data.token,
-                        server_whatsapi: res.data.dados_adicionais[0].server_whatsapi
+                        server_whatsapi: "http://localhost:5000"
                     }
                     setUser(userObj)
+                }else{
+                    signout()
+                    setUser(false)
                 }
             }).catch(
                 ()=>{
@@ -54,13 +57,13 @@ export function AuthProvider({children}){
              uId = user.id
              uName = user.name.split(" ")[0]
              uToken = user.token
-             //uServer = user.dados_adicionais[0].server_whatsapi
+             uServer = user.server_whatsapi
         }
         return {
             id: uId,
             name: uName,
             token: uToken,
-            server_whatsapi: "https://maringa1.mactus.online"
+            server_whatsapi: "http://localhost:5000"
         }
     }
 

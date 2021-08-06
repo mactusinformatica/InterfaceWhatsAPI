@@ -37,15 +37,16 @@ export const ChatContainer = ({urlHost}) => {
                     channel: active.channel,
                     schedule: active.schedule,
                     isSupport: true
-                }
-            )
+                })
             
             }
         },[active]
     )
 
     socketEvent("message",(message) => {
-        setMessages([...messages, message])
+        if(message.room == active.id_room ){
+            setMessages([...messages, message])
+        }
     })
 
     socketEvent("previousMessages",(previousMessages) => {
