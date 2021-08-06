@@ -11,15 +11,7 @@ export const BtnAttach = ({user,active,socket})=>{
     
     function sendPhoto(e){
         var dateTime = getDateTime()
-           
-        // const reader = new FileReader();
-        // reader.onload = function() {
-        //   const base64 = this.result.replace(/.*base64,/, '');
-        //   console.log("data:image/jpg;base64,"+base64)
-        // };
-        // reader.readAsDataURL(e.target.files[0]);
-        // console.log("reader: ",reader)
-
+        
         const reader = new FileReader();
             reader.onload = function() {
                 const bytes = new Uint8Array(this.result);

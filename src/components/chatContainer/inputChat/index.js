@@ -60,7 +60,7 @@ export const InputChat = ({active, socket}) => {
             </Text>
             :
              <>
-               {/* <BtnAttach user={user} active={active} socket={socket}/> */}
+               <BtnAttach user={user} active={active} socket={socket}/>
                 <Box width="85%" pt={"5px"}>    
                 <textarea
                 onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}

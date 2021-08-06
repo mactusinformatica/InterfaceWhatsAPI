@@ -29,7 +29,7 @@ const Index = ({urlHost})=>{
   const makeCall = async ()=>{
     var dateTime = getDateTime()
   
-    await socket.emit("joinRoom", {id_room: "123", name:"name1", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    await socket.emit("joinRoom", {id_room: "554499378974", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
   
   }
 
@@ -69,14 +69,14 @@ const Index = ({urlHost})=>{
           <Progress size="xs" isIndeterminate />
           }
         </ChatProvider>
-        {/* <Box>
+        <Box>
           <button onClick={(e)=>makeCall()}>
                 Atendimento
           </button>
           <button onClick={(e)=>sendMessage()}>
                 Mensagem
           </button>
-        </Box> */}
+        </Box>
         
       </Flex>
           
