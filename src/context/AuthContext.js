@@ -26,7 +26,7 @@ export function AuthProvider({children}){
                         name: res.data.name.split(" ")[0],
                         id: res.data.id,
                         token: res.data.token,
-                        server_whatsapi: "http://localhost:5000"
+                        server_whatsapi: res.data.dados_adicionais[0].server_whatsapi
                     }
                     setUser(userObj)
                 }else{
@@ -63,7 +63,7 @@ export function AuthProvider({children}){
             id: uId,
             name: uName,
             token: uToken,
-            server_whatsapi: "http://localhost:5000"
+            server_whatsapi: uServer
         }
     }
 
