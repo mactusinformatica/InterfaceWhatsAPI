@@ -1,9 +1,6 @@
 
 import { Box, Text,useColorMode, Flex, Stack, Button,useDisclosure } from '@chakra-ui/react'
-import { CloseIcon,MdCall} from '@chakra-ui/icons'
-import { BsFillPersonFill,BsThreeDotsVertical} from "react-icons/bs"
 import { IoMdCloseCircle, IoMdPower } from "react-icons/io"
-import {Avatar} from '../Avatar'
 import {
     Modal,
     ModalOverlay,

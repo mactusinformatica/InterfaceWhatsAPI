@@ -1,4 +1,4 @@
-import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,Alert } from '@chakra-ui/react'
+import { Box, Flex,Input,Button,useColorMode, Text,InputRightElement,InputGroup,useToast} from '@chakra-ui/react'
 import {ViewOffIcon , ViewIcon, WarningIcon} from '@chakra-ui/icons'
 import { useState, useEffect} from 'react';
 import useAuth from '../hooks/useAuth';
@@ -13,6 +13,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const [messageSignin, setMessageSignin] = useState("");
+    const toast = useToast()
     const {colorMode} = useColorMode();
     const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
     const bgColor = { light: 'light.background', dark: 'dark.background' }
@@ -27,7 +28,20 @@ const Login = ({urlHost, apiFinanceiro})=>{
         const response = await signin({email:email,password:password, apiFinanceiro});
         
         if(response==false){
-            setMessageSignin("Credenciais inválidas")
+            toast({
+                title: `Falha ao faze \n Verifique suas credenciais`,
+                status: 'error',
+                position: 'top',
+                isClosable: true,
+              })
+           
+        }else{
+            toast({
+                title: `Autenticação bem sucedida!`,
+                status: 'success',
+                position: 'top',
+                isClosable: true,
+              })
         }
         setIsLoading(false);
     }

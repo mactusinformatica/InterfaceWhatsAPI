@@ -3,7 +3,7 @@ import useChat from '../../hooks/useChat'
 import {useState, useEffect} from 'react'
 import useAuth from '../../hooks/useAuth';
 
-import { Box} from '@chakra-ui/react'
+import { Box,useToast} from '@chakra-ui/react'
 import {HeaderChat} from './HeaderChat'
 import {InputChat} from './inputChat'
 import {PanelChat} from './panelChat'
@@ -26,7 +26,8 @@ export const ChatContainer = ({urlHost}) => {
     const [messages,setMessages] = useState([]);
 
     const dateTime = getDateTime()
-   
+    const toast = useToast()
+
     useEffect(
         ()=>{
             if(active){
@@ -44,7 +45,8 @@ export const ChatContainer = ({urlHost}) => {
     )
 
     socketEvent("message",(message) => {
-        if(message.room == active.id_room ){
+    
+        if(message.room == active?.id_room ){
             setMessages([...messages, message])
         }
     })
@@ -71,6 +73,8 @@ export const ChatContainer = ({urlHost}) => {
         await socket.emit("endCall", {name_sup:supname,id_sup:supid, id_room:id_room, 
                           schedule_room:schedule_room, schedule_current:dateTime.time,  date:dateTime.date, channel:active.channel}
         ,setActive(''))
+        
+
         
     }
 
