@@ -29,7 +29,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
         
         if(response==false){
             toast({
-                title: `Falha ao faze \n Verifique suas credenciais`,
+                title: `Falha de autenticação, verifique suas credenciais`,
                 status: 'error',
                 position: 'top',
                 isClosable: true,
