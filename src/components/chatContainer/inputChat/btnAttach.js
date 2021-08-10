@@ -48,11 +48,11 @@ export const BtnAttach = ({user,active,socket})=>{
                         </label>
                     </Tooltip>
                     
-                    <Tooltip label="Documento" aria-label="A tooltip">
+                    {/* <Tooltip label="Documento" aria-label="A tooltip">
                         <label for="inputFile">
                             <BtnSend  icon={<IoDocumentText  fontSize={"25px"}/>} />
                         </label>
-                    </Tooltip>
+                    </Tooltip> */}
                 </PopoverBody>
             </PopoverContent>
             <PopoverTrigger>

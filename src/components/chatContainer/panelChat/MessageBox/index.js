@@ -1,7 +1,6 @@
-
 import { Box,Text, Flex, useColorMode} from '@chakra-ui/react'
-import useAuth from '../../../hooks/useAuth';
-
+import useAuth from '../../../../hooks/useAuth';
+import {Content} from './Content'
 
 
 export const MessageBox = ({message}) => {
@@ -28,10 +27,7 @@ export const MessageBox = ({message}) => {
             borderRadius={"12px 12px 12px 12px"}
             boxShadow={" 0px 4px 4px rgba(0, 0, 0, 0.25)"}
             >
-                
-                <Text fontWeight={"500"} color={primaryColorDark[colorMode]} >
-                    {message.content}
-                </Text> 
+                <Content message={message} fontWeight={"500"} color={primaryColorDark[colorMode]}/>
                 <Text fontSize="12px"  color={primaryColorDark[colorMode]}  opacity textAlign="end">
                     {message.schedule_message}
                 </Text> 
@@ -41,9 +37,7 @@ export const MessageBox = ({message}) => {
         <Flex width="100%"  justifyContent="flex-end">
             <Box 
             bg={boxMessageColor[colorMode]}
-            
-            minWidth="100px"
-            maxWidth="450px" 
+            width={'max-content'}
             pr={3}
             pl={3} 
             pt={2}
@@ -51,16 +45,13 @@ export const MessageBox = ({message}) => {
             borderRadius={"12px 0px 12px 12px"}
             boxShadow={" 0px 4px 4px rgba(0, 0, 0, 0.25)"}
             >
-                
-                <Text fontWeight={"400"} color={"#FFFFFF"}>
-                    {message.content}
-                </Text> 
+                <Content message={message} color={"#FFFFFF"}/>
+                    
                 <Text fontSize="12px" opacity textAlign="end" color={"#FFFFFF"}>
                     {message.schedule_message}
                 </Text> 
             </Box>
         </Flex>
-       
         :
         <Flex width="100%" justifyContent="flex-start">
             <Box 
@@ -76,9 +67,7 @@ export const MessageBox = ({message}) => {
                 <Text color={primaryColor[colorMode]} fontSize="12px" opacity textAlign="start">
                     {message.name_author}
                 </Text> 
-                <Text color={primaryColor[colorMode]} fontWeight={"400"} color={"#000000"}>
-                    {message.content}
-                </Text> 
+                <Content message={message} color={"#000000"}/>
                 <Text color={primaryColor[colorMode]} fontSize="12px" opacity textAlign="end">
                     {message.schedule_message}
                 </Text> 

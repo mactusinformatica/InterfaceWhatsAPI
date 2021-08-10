@@ -73,9 +73,6 @@ export const ChatContainer = ({urlHost}) => {
         await socket.emit("endCall", {name_sup:supname,id_sup:supid, id_room:id_room, 
                           schedule_room:schedule_room, schedule_current:dateTime.time,  date:dateTime.date, channel:active.channel}
         ,setActive(''))
-        
-
-        
     }
 
     return(
