@@ -15,7 +15,7 @@ export const Content = ({message,color, fontWeight}) => {
                 
             :
                 <Text fontWeight={"400"}  color={color} >
-                   <i>INVALID TYPE MESSAGE</i>
+                   <i>MENSAGEM INVÁLIDA({message.type})</i>
                 </Text> 
             }
         </>
