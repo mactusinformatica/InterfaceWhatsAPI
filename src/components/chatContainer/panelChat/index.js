@@ -15,7 +15,6 @@ export const PanelChat = ({messages,urlHost}) => {
     useEffect(scrollToBottom, [messages]);
    
 
-    console.log(messages)
     return(
         <Box
         id="scroll"

@@ -29,7 +29,7 @@ const Index = ({urlHost})=>{
   const makeCall = async ()=>{
     var dateTime = getDateTime()
   
-    await socket.emit("joinRoom", {id_room: "566-556", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    await socket.emit("joinRoom", {id_room: "554499378974", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
   
   }
 

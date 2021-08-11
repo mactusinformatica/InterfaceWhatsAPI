@@ -9,7 +9,7 @@ export function SocketProvider({children}){
     const[socket, setSocket] = useState(null);
 
     const connectSocket = (url)=>{
-        setSocket(io(url,{ transports : ['websocket'] }))
+        setSocket(io(url))
     }
 
     const socketEvent= (eventName, cb)=>{
