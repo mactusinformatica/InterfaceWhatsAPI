@@ -31,13 +31,12 @@ export function AuthProvider({children}){
                     }
                     setUser(userObj)
                 }else{
-                    console.log("1")
                     signout()
                     setUser(false)
                 }
             }).catch(
                 (err)=>{
-                    console.log("2 ", err)
+                    console.log(err)
                     signout()
                     setUser(false)
                 }
@@ -55,7 +54,8 @@ export function AuthProvider({children}){
              uId = user.id
              uName = user.nome.split(" ")[0]
              uToken = user.token
-             uServer = user.dados_adicionais[0].server_whatsapi
+             uServer = "http://localhost:5000"
+            //uServer = user.dados_adicionais[0].server_whatsapi
         }else if(user.name){
              uId = user.id
              uName = user.name.split(" ")[0]
@@ -86,7 +86,6 @@ export function AuthProvider({children}){
             const response = await axios(config).then(async function (res) {
                 if(res.data.erro == false){
                     var userObj = formatUser(res.data)
-                    console.log(userObj)
                     await setUser(userObj);
                     await setCookie(undefined,"macwhatsapi-auth",userObj.token,{
                         maxAge: 60 * 60 * 24 //24h

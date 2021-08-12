@@ -17,11 +17,12 @@ export const Content = ({message,color, fontWeight}) => {
                 
             :message.type == "file"?
                 <Box fontWeight={"200"} width={'100px'} display="flex" justifyContent="space-evenly" color={color} >
-                    <a  href={message.content} download 
+                    <a  href={message.content}
                     style={{
                             display:"flex",
                             alignItems:"center"
-                           }}>
+                           }}
+                    download>
                         <RiFileTextFill style={{marginRight:"10px"}}/>
                         Arquivo 
                         <DownloadIcon  style={{marginLeft:"10px"}}/>

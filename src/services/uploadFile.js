@@ -2,28 +2,28 @@ import axios from 'axios';
 import FormData from 'form-data'
 
 
-export const uploadFile = async (file,urlServer)=>{
+export const uploadFile = async (file,{urlServer, fileName})=>{
+    
     var data = new FormData();
     data.append('file', file);
-
+    console.log(fileName)
     var config = {
     method: 'post',
-    url: `${urlServer}/uploadFile`,
+    url: `${urlServer}/uploadFile?name=${fileName}`,
     headers: { 
         'Content-Type': 'multipart/form-data'
     },
     data : data
     };
 
-    var response = await axios(config)
+  const response = await axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      return true
+      
+      return response.data
     })
     .catch(function (error) {
-      console.log(error);
+    
       return false
     });
-
-    return response
+  return response
 }
