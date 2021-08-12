@@ -36,12 +36,10 @@ export const BtnAttach = ({user,active,socket})=>{
                 },e.target.value=""
                 )
             };
-
             reader.readAsArrayBuffer(e.target.files[0]);
         }
-        
     };
-     async function sendFile(e){
+     async function sendFile(e, type){
         var dateTime = getDateTime()
         if(e.target.files[0]){
             if(e.target.files[0].size >= 16000000){
@@ -69,7 +67,7 @@ export const BtnAttach = ({user,active,socket})=>{
                         {
                             id_author:user.id,
                             content:response.url,
-                            type:"file",
+                            type:type,
                             room: active.id_room,
                             name_author:user?.name,
                             schedule_message: dateTime.time,
@@ -98,8 +96,8 @@ export const BtnAttach = ({user,active,socket})=>{
             width="max-content" bg="transparent" border="none" >
 
                 <PopoverBody >
-                    <Input value={image} onChange={(e)=>sendPhoto(e)} id="inputImage" display="none" type="file"  accept="image/*"/>
-                    <Input id="inputFile" onChange={(e)=>sendFile(e)}    display="none" type="file"/>
+                    <Input value={image} onChange={(e)=>sendFile(e,"image")} id="inputImage" display="none" type="file"  accept="image/*"/>
+                    <Input id="inputFile" onChange={(e)=>sendFile(e,"file")}    display="none" type="file"/>
 
                     <Tooltip label="Imagem" aria-label="Enviar imagem">
                         <label for="inputImage">
