@@ -22,7 +22,7 @@ export const uploadFile = async (file,{urlServer, fileName})=>{
       return response.data
     })
     .catch(function (error) {
-    
+      console.log(error)
       return false
     });
   return response
