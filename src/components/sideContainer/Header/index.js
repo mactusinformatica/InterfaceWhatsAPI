@@ -1,5 +1,6 @@
 
 import useAuth from '../../../hooks/useAuth'
+import {HamburgerIcon} from '@chakra-ui/icons'
 import { Box,useColorMode, Text,Input,Menu,MenuButton,MenuList, MenuItem, IconButton } from "@chakra-ui/react"
 import { BsFillPersonFill,BsFilterRight,BsSearch} from "react-icons/bs"
 import { MdSettings,MdExitToApp} from "react-icons/md"
@@ -43,7 +44,7 @@ export const Header = (props) => {
                     <MenuButton
                         as={IconButton}
                         aria-label="Options"
-                        icon={<MdSettings cursor="pointer" fontSize='25px'/>}
+                        icon={<HamburgerIcon cursor="pointer" fontSize='25px'/>}
                         bg={'transparent'}
                         _hover={{
                             background:"transparent"
