@@ -67,8 +67,9 @@ export const InputChat = ({active, socket}) => {
                 bg= {background[colorMode]}
                 color={fontColor[colorMode]}
                 borderRadius="20px"
-                boxShadow= "0px 2px 4px rgba(51, 173, 225, 0.25)"
-
+                style={{
+                    boxShadow: "0px 4px 4px rgb(22, 75, 97,0.5)"
+                }}
                 >    
                 <textarea
                     onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}
