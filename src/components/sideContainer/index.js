@@ -20,6 +20,9 @@ export const SideContainer = (props) => {
         socket.emit("reqCallList")
       }
     },[socket]);
+  
+  
+
   socketEvent('resCallList', calls => {
 
     if(calls!=null){
@@ -28,7 +31,7 @@ export const SideContainer = (props) => {
 
     }
   })
-
+  
   socketEvent('newCall', call => {
     if(call!=null){
 

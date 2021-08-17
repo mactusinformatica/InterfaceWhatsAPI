@@ -8,9 +8,8 @@ export function SocketProvider({children}){
     const[connectError, setConnectError] = useState(null);
 
     const connectSocket =  (url)=>{
-             setSocket(io(url))
+             setSocket(io(url,{reconnection: false}))
     }
-
 
     const socketEvent= (eventName, cb)=>{
         useEffect(() => {
