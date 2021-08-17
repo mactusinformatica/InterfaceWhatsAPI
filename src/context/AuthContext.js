@@ -123,7 +123,8 @@ export function AuthProvider({children}){
         user,
         signin,
         signout,
-        loading
+        loading,
+        setLoading
     }}>
        {children} 
     </AuthContext.Provider>

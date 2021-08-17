@@ -7,10 +7,12 @@ export const MessageBox = ({message}) => {
     const {user} = useAuth();
 
     const {colorMode} = useColorMode();
+    const fontColor = { light: 'light.fontColor', dark: 'dark.fontColor' }
     const primaryColorDark = { light: 'dark.primary', dark: 'dark.primary' }
     const primaryColor = { light: 'light.primary', dark: 'light.primary' }
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'light.hoverSecondary' }
     const boxMessageColor = { light: 'light.boxMessage', dark: 'dark.boxMessage'}
+    const boxMessage2 = { light: 'light.boxMessage2', dark: 'dark.boxMessage2' }
     return(
         <>
         {message.id_author==0?
@@ -55,7 +57,7 @@ export const MessageBox = ({message}) => {
         :
         <Flex width="100%" justifyContent="flex-start">
             <Box 
-            bg={'#ffffff'}
+            bg={boxMessage2[colorMode]}
             minWidth="100px"
             maxWidth="450px" 
             pr={3}
@@ -67,7 +69,7 @@ export const MessageBox = ({message}) => {
                 <Text color={primaryColor[colorMode]} fontSize="12px" opacity textAlign="start">
                     {message.name_author}
                 </Text> 
-                <Content message={message} color={"#000000"}/>
+                <Content message={message} color={fontColor[colorMode]}/>
                 <Text color={primaryColor[colorMode]} fontSize="12px" opacity textAlign="end">
                     {message.schedule_message}
                 </Text> 

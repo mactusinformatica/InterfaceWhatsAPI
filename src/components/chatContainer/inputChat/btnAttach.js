@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {uploadFile} from '../../../services/uploadFile'
 import getDateTime from '../../../services/getDateTime'
-import { Box, Input,Tooltip,Popover,PopoverBody,PopoverContent,PopoverTrigger, useToast} from '@chakra-ui/react'
+import { Box, Input,Tooltip,Popover,PopoverBody,PopoverContent,PopoverTrigger, useToast, useColorMode} from '@chakra-ui/react'
 import {BtnSend} from './btnSend'
 import { AttachmentIcon} from '@chakra-ui/icons'
 import { IoImage,IoDocumentText} from "react-icons/io5"
@@ -10,35 +10,18 @@ import { RiCreativeCommonsZeroLine } from 'react-icons/ri'
 export const BtnAttach = ({user,active,socket})=>{
     const [image, setImage] = useState();
     const toast = useToast()
-    function sendPhoto(e){
-        var dateTime = getDateTime()
-        if(e.target.files[0].size >= 5000000){
-            toast({
-                title: `Arquivo muito grande, o tamanho limite é de 5MB`,
-                status: 'error',
-                position: 'top',
-                isClosable: true,
-              })
-        }else{
-            const reader = new FileReader();
-            reader.onload = function() {
-                const bytes = new Uint8Array(this.result);
-                socket.emit('chat-message',
-                {
-                    id_author:user.id,
-                    content:bytes,
-                    type:"image",
-                    room: active.id_room,
-                    name_author:user?.name,
-                    schedule_message: dateTime.time,
-                    channel: active.channel,
-                    isSupport: true,
-                },e.target.value=""
-                )
-            };
-            reader.readAsArrayBuffer(e.target.files[0]);
-        }
-    };
+
+    const {colorMode} = useColorMode();
+    const background = { light: 'light.background', dark: 'dark.background' }
+    const fontColor = { light: 'light.fontColor', dark: 'dark.fontColor' }
+
+    // toast({
+    //     title: `Arquivo muito grande, o tamanho limite é de 5MB`,
+    //     status: 'error',
+    //     position: 'top',
+    //     isClosable: true,
+    //   })
+
      async function sendFile(e, type){
         var dateTime = getDateTime()
         if(e.target.files[0]){
@@ -119,8 +102,10 @@ export const BtnAttach = ({user,active,socket})=>{
                     marginBottom={"10px"} 
                     borderRadius="30px" 
                     p={2}
+                    bg={background[colorMode]}
+                    color={fontColor[colorMode]}
                     style={{
-                        boxShadow: "0px 4px 4px rgba(51, 173, 225, 0.25)"
+                        boxShadow: "0px 4px 4px rgb(22, 75, 97,0.5)"
                     }}
                     _hover={
                         {

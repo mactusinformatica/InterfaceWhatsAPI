@@ -3,8 +3,8 @@ import {ChatProvider} from '../context/ChatContext'
 import { Container } from '../components/Container'
 import { SideContainer } from '../components/sideContainer'
 import { ChatContainer } from '../components/chatContainer'
-import { Flex, Progress, Box} from '@chakra-ui/react'
-import{useState,useEffect} from 'react'
+import { Flex, Spinner , Box} from '@chakra-ui/react'
+import{useState,useEffect,useLayoutEffect} from 'react'
 import useSocket from '../hooks/useSocket'
 import useAuth from '../hooks/useAuth';
 
@@ -13,23 +13,25 @@ import getDateTime from '../services/getDateTime'
 
 const Index = ({urlHost})=>{
 
-  const {user} = useAuth();
-  const {socket, connectSocket} = useSocket();
-
+  const {user, loading, setLoading} = useAuth();
+  const {socket, connectSocket, connectError, setConnectError,verifyConnection} = useSocket();
   useEffect(
     ()=>{
       if(user){
         if(!socket){
           connectSocket(user.server_whatsapi)
+        }else{
+          socket.on('connect', () => {
+            setLoading(false);
+          }) 
+        }
       }
-      }
-
-  },[socket, user]);
+  },[socket,user]);
 
   const makeCall = async ()=>{
-    var dateTime = getDateTime()
+    // var dateTime = getDateTime()
   
-    await socket.emit("joinRoom", {id_room: "554499378974", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    // await socket.emit("joinRoom", {id_room: "554499378974", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
   
   }
 
@@ -60,16 +62,25 @@ const Index = ({urlHost})=>{
       height={"100%"}>
         <ChatProvider>
           {
-          user && socket?
-            <>
-              <SideContainer urlHost = {urlHost}  width='300px' height='100%'/>
-              <ChatContainer urlHost = {urlHost} height='100%'/>
-            </>
-          :
-          <Progress size="xs" isIndeterminate />
+            connectError?
+              <Box display="flex" flexDirection="column" width="100%" height="100%" justifyContent="center" alignItems="center">
+                  <h1>ERRO DE CONEXÃO</h1>
+              </Box>
+            :
+              loading?
+                <Box display="flex" flexDirection="column" width="100%" height="100%" justifyContent="center" alignItems="center">
+                  <h1>CARREGANDO</h1>
+                  <Spinner />
+                </Box>
+              
+              : 
+                <>
+                  <SideContainer urlHost = {urlHost}  width='300px' height='100%'/>
+                  <ChatContainer urlHost = {urlHost} height='100%'/>
+                </>
           }
         </ChatProvider>
-        <Box>
+        {/* <Box>
           <button onClick={(e)=>makeCall()}>
                 Atendimento
           </button>
@@ -77,7 +88,7 @@ const Index = ({urlHost})=>{
                 Mensagem
           </button>
         </Box>
-        
+         */}
       </Flex>
           
     </Container>

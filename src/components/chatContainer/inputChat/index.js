@@ -1,7 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import useAuth from '../../../hooks/useAuth';
-import { Box, useColorMode,Text,useDisclosure,Popover,PopoverBody,PopoverContent,PopoverTrigger} from '@chakra-ui/react'
+import { Box, useColorMode,Text,useDisclosure,Popover,PopoverBody,PopoverContent,PopoverTrigger, Textarea} from '@chakra-ui/react'
 import { AttachmentIcon} from '@chakra-ui/icons'
 import { BsFillMicFill} from "react-icons/bs"
 import { IoSend} from "react-icons/io5"
@@ -16,8 +16,10 @@ export const InputChat = ({active, socket}) => {
     const {user} = useAuth();
     const [text, setText] = useState("");
     const {colorMode} = useColorMode();
-    const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' }
-    const fontColor =  { light: 'light.fontColor', dark: 'dark.fontColor' }
+    const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'dark.hoverSecondary' } 
+    const background = { light: 'light.background', dark: 'dark.background' }
+    const fontColor = { light: 'light.fontColor', dark: 'dark.fontColor' }
+
     const { isOpen, onToggle } = useDisclosure()
 
     function sendMessage(){
@@ -61,25 +63,31 @@ export const InputChat = ({active, socket}) => {
             :
              <>
                <BtnAttach user={user} active={active} socket={socket}/>
-                <Box width="85%" pt={"5px"}>    
+                <Box width="85%"
+                bg= {background[colorMode]}
+                color={fontColor[colorMode]}
+                borderRadius="20px"
+                boxShadow= "0px 2px 4px rgba(51, 173, 225, 0.25)"
+
+                >    
                 <textarea
-                onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}
-                onKeyUp={event => event.key === "Enter" && !event.shiftKey ?sendMessage():null}
-                value={text}
-                onChange={(e)=>setText(e.target.value)}
-                style={{
-                    border:"none",
-                    overflow: 'hidden',
-                    resize: "none",
-                    outline: "none",
-                    borderRadius:"20px",
-                    padding:"10px 20px",
-                    flexGrow:"1",
-                    height: "50px",
-                    width:"100%",
-                    boxShadow: "0px 4px 4px rgba(51, 173, 225, 0.25)",
-                }}
-                placeholder="Digite aqui sua mensagem"
+                    onKeyDown={event => event.key === "Enter" && text=="" && !event.shiftKey  ? event.preventDefault():null}
+                    onKeyUp={event => event.key === "Enter" && !event.shiftKey ?sendMessage():null}
+                    value={text}
+                    onChange={(e)=>setText(e.target.value)}
+                    style={{
+                        background: "transparent",
+                        border:"none",
+                        overflow: 'hidden',
+                        resize: "none",
+                        outline: "none",
+                        borderRadius:"20px",
+                        padding:"10px 20px",
+                        flexGrow:"1",
+                        height: "50px",
+                        width:"100%",
+                    }}
+                    placeholder="Digite aqui sua mensagem"
                 >
                 </textarea>
                 

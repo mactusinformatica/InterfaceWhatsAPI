@@ -60,9 +60,9 @@ export const Header = (props) => {
                     ml={'3'}
                     >
                        
-                        {/* <MenuItem>
+                        <MenuItem>
                             <DarkModeSwitch />  DarkMode
-                        </MenuItem>  */}
+                        </MenuItem> 
                         <MenuItem fontSize={'16px'} onClick={()=>signout()} icon={<MdExitToApp fontSize='20px'/>}>
                             Sair 
                         </MenuItem> 

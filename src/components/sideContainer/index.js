@@ -7,7 +7,7 @@ import getDateTime from '../../services/getDateTime'
 
 export const SideContainer = (props) => {
 
-  const {socket,socketEvent} = useSocket();
+  const {socket,socketEvent, setConnectError} = useSocket();
   const {colorMode} = useColorMode();
   const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   const color = { light: 'light.fontColor', dark: 'dark.fontColor' }

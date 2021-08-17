@@ -4,13 +4,13 @@ const SocketContext = createContext();
 
 export function SocketProvider({children}){
 
-    
-
     const[socket, setSocket] = useState(null);
+    const[connectError, setConnectError] = useState(null);
 
-    const connectSocket = (url)=>{
-        setSocket(io(url))
+    const connectSocket =  (url)=>{
+             setSocket(io(url))
     }
+
 
     const socketEvent= (eventName, cb)=>{
         useEffect(() => {
@@ -19,8 +19,6 @@ export function SocketProvider({children}){
             return function useSocketCleanup() {
             socket?.off(eventName, cb)
             }
-        
-           
         }, [eventName, cb])
 
         return socket
@@ -30,7 +28,9 @@ export function SocketProvider({children}){
     return <SocketContext.Provider value={{
         socket,
         connectSocket,
-        socketEvent
+        socketEvent,
+        connectError,
+        setConnectError
     }}>
        {children} 
     </SocketContext.Provider>

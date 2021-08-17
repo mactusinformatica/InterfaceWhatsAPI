@@ -25,7 +25,8 @@ const theme = extendTheme({
       hoverSecondary:"#E5F6FD",
       background:'#f9f9f9f9', 
       fontColor:"#164B61",
-      boxMessage: "rgb(99, 179, 237)"
+      boxMessage: "rgb(99, 179, 237)",
+      boxMessage2: "#ffffff"
     },
     dark:{
       primary:'#164B61',
@@ -33,7 +34,8 @@ const theme = extendTheme({
       hoverSecondary:"#164B61",
       background:'#1B262C',
       fontColor:"rgba(255, 255, 255, 1)",
-      boxMessage: "rgb(26, 54, 93)"
+      boxMessage: "rgb(26, 54, 93)",
+      boxMessage2: "#2d393f"
     },
     colorful:{
       red: "rgb(224, 74, 99)",
@@ -46,8 +48,6 @@ const theme = extendTheme({
       red06: "rgb(224, 74, 99,0.6)",
       blue06:"rgb(66, 153, 225,0.6)",
       green06:"rgb(72, 187, 120,0.6)",
-      
-
     }
   },
   fonts,
