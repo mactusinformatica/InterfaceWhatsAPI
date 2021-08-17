@@ -55,6 +55,9 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                         variant="solid" 
                         fontSize="15px"
                         onClick={onOpen}
+                        _hover={{
+                            opacity: "0.7"
+                            }}
                         >
                             FINALIZAR
                         </Button>
@@ -91,6 +94,9 @@ export const HeaderChat = ({active, exitRoom, endCall}) => {
                      fontSize="15px"
                      onClick={e=>exitRoom({ id_room:active.id_room, schedule_room: active.schedule})}
                      color={"#FFFFFF"}
+                     _hover={{
+                        opacity: "0.7"
+                        }}
                      >
                          SAIR
                     </Button>
