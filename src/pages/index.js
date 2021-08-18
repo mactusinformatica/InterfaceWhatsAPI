@@ -35,10 +35,10 @@ const Index = ({urlHost})=>{
   socketEvent('connect_failed', err => setConnectError(true));
 
   const makeCall = async ()=>{
-    // var dateTime = getDateTime()
-  
-    // await socket.emit("joinRoom", {id_room: "554499378974", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
-  
+
+    var dateTime = getDateTime()
+    await socket.emit("joinRoom", {id_room: "658567", name:"CaioFake", channel: "whatsapp", schedule:dateTime.time, date:dateTime.date, isSupport:false})
+    
   }
 
   
@@ -97,8 +97,8 @@ const Index = ({urlHost})=>{
           <button onClick={(e)=>sendMessage()}>
                 Mensagem
           </button>
-        </Box>
-         */}
+        </Box> */}
+        
       </Flex>
           
     </Container>

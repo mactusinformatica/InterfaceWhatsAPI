@@ -9,7 +9,6 @@ import {
     ModalFooter,
     ModalBody,
   } from "@chakra-ui/react"
-import getDateTime from '../../services/getDateTime'
 
 export const HeaderChat = ({active, exitRoom, endCall}) => {
 

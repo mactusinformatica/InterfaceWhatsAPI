@@ -45,7 +45,7 @@ export const ChatContainer = ({urlHost}) => {
     )
 
     socketEvent("message",(message) => {
-    
+        
         if(message.room == active?.id_room ){
             setMessages([...messages, message])
         }
@@ -56,6 +56,14 @@ export const ChatContainer = ({urlHost}) => {
         setMessages(previousMessages)
     })
 
+    socketEvent("endThisCall",() => {
+        if(active!=""){
+            active.status = "finished"
+        }
+    })
+
+    
+    
     async function joinRoom({id_room,name,status,channel,isSupport, schedule}){
         
         
