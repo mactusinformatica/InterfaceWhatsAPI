@@ -20,7 +20,6 @@ export function AuthProvider({children}){
                   }
             };
             axios(config).then(function (res) {
-                console.log(res.data)
                 if(res.data.erro ==false){
                     var userObj ={
                         name: res.data.name.split(" ")[0],
@@ -29,10 +28,10 @@ export function AuthProvider({children}){
                         //server_whatsapi:"http://localhost:5000"
                         server_whatsapi: res.data.dados_adicionais[0].server_whatsapi
                     }
+                    console.log("setUserAUTH")
                     setUser(userObj)
                 }else{
                     signout()
-                    setUser(false)
                 }
             }).catch(
                 (err)=>{
@@ -54,7 +53,7 @@ export function AuthProvider({children}){
              uId = user.id
              uName = user.nome.split(" ")[0]
              uToken = user.token
-            // uServer = "http://localhost:5000"
+             //uServer = "http://localhost:5000"
              uServer = user.dados_adicionais[0].server_whatsapi
         }else if(user.name){
              uId = user.id
@@ -86,19 +85,18 @@ export function AuthProvider({children}){
             const response = await axios(config).then(async function (res) {
                 if(res.data.erro == false){
                     var userObj = formatUser(res.data)
-                    console.log(userObj)
                     await setUser(userObj);
                     await setCookie(undefined,"macwhatsapi-auth",userObj.token,{
                         maxAge: 60 * 60 * 24 //24h
                     })
                     Router.push('/');
                 }else{
-                    console.log("SUBMIT ERROR: ",res.data.erro )
+                    console.log(res.data.erro )
                     return false;
                 }
             })
             .catch(function (error) {
-                console.log("error: ", error )
+                console.log(error )
                 setUser(error.data);
             });
             return response;
@@ -122,6 +120,7 @@ export function AuthProvider({children}){
     }
     return <AuthContext.Provider value={{
         user,
+        setUser,
         signin,
         signout,
         loading,

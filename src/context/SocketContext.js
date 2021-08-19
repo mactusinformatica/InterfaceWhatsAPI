@@ -21,9 +21,8 @@ export function SocketProvider({children}){
         }, [eventName, cb])
 
         return socket
-    }
-
-
+    }  
+    
     return <SocketContext.Provider value={{
         socket,
         connectSocket,

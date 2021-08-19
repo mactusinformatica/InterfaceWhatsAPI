@@ -13,6 +13,7 @@ export const MessageBox = ({message}) => {
     const hoverSecondary =  { light: 'light.hoverSecondary', dark: 'light.hoverSecondary' }
     const boxMessageColor = { light: 'light.boxMessage', dark: 'dark.boxMessage'}
     const boxMessage2 = { light: 'light.boxMessage2', dark: 'dark.boxMessage2' }
+    
     return(
         <>
         {message.id_author==0?

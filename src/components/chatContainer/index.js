@@ -26,7 +26,6 @@ export const ChatContainer = ({urlHost}) => {
     const [messages,setMessages] = useState([]);
 
     const dateTime = getDateTime()
-    const toast = useToast()
 
     useEffect(
         ()=>{

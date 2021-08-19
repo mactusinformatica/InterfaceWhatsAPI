@@ -45,9 +45,11 @@ export const InputChat = ({active, socket}) => {
 
     return(
         <Box
-        height="100px"
+        height="max-content"
         width= "100%"
         bg={hoverSecondary[colorMode]}
+        pt="5px"
+        pb="5px"
         border={"0px"}
         display="flex"
         justifyContent="space-around"
@@ -87,6 +89,7 @@ export const InputChat = ({active, socket}) => {
                         flexGrow:"1",
                         height: "50px",
                         width:"100%",
+                        fontSize:"14px"
                     }}
                     placeholder="Digite aqui sua mensagem"
                 >

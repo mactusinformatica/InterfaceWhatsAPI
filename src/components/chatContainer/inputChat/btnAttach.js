@@ -102,6 +102,7 @@ export const BtnAttach = ({user,active,socket})=>{
                     marginBottom={"10px"} 
                     borderRadius="30px" 
                     p={2}
+                    m={"5px"} 
                     bg={background[colorMode]}
                     color={fontColor[colorMode]}
                     style={{

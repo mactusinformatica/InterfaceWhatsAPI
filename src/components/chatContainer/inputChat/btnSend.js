@@ -8,7 +8,7 @@ export const BtnSend = ({icon,event}) => {
         <Box 
         onClick={event?(e)=>event():null}
         cursor={"pointer"} bg={"#FFFFFF"} 
-        marginBottom={"10px"} 
+        m={"5px"}
         borderRadius="30px" 
         p={2}
         bg={background[colorMode]}

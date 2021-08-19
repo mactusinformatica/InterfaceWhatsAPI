@@ -128,6 +128,7 @@ export const Calls = ({title, calls,urlHost}) => {
                             (c)=>{
                             return (
                             <CallBox 
+                            urlHost={urlHost}
                             contact={c}
                             />
                             )}

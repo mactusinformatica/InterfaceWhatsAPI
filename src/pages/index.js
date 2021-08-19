@@ -16,8 +16,6 @@ const Index = ({urlHost})=>{
 
   const {user, loading, setLoading} = useAuth();
   const {socket, connectSocket, connectError, setConnectError,socketEvent} = useSocket();
-  const {colorMode} = useColorMode();
-  const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
   useEffect(
     ()=>{
       if(user){
@@ -33,7 +31,8 @@ const Index = ({urlHost})=>{
 
   socketEvent('connect_error', err => setConnectError(true));
   socketEvent('connect_failed', err => setConnectError(true));
-
+  socketEvent('disconnect', err => setConnectError(true));
+  
   const makeCall = async ()=>{
 
     var dateTime = getDateTime()
@@ -86,18 +85,18 @@ const Index = ({urlHost})=>{
               : 
                 <>
                   <SideContainer urlHost = {urlHost}  width='300px' height='100%'/>
-                  <ChatContainer urlHost = {urlHost} height='100%'/>
+                  <ChatContainer urlHost = {urlHost} />
                 </>
           }
         </ChatProvider>
-        {/* <Box>
+        <Box>
           <button onClick={(e)=>makeCall()}>
                 Atendimento
           </button>
           <button onClick={(e)=>sendMessage()}>
                 Mensagem
           </button>
-        </Box> */}
+        </Box>
         
       </Flex>
           
