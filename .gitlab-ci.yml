@@ -14,7 +14,7 @@ init_PRODUCTION:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
     - docker rm -f $NAME || true
     - docker build --build-arg HOST=$HOST --build-arg API_FINANCEIRO=$API_FINANCEIRO -t $NAME .
-    - docker run -d --name interface-whatsapi -p 127.0.0.1:3000:3000 --restart always $NAME 
+    - docker run -d --name  $NAME -p 127.0.0.1:3000:3000 --restart always $NAME 
   when: manual
   only:
     - master
@@ -30,7 +30,7 @@ init_DEVELOPMENT:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
     - docker rm -f $NAME || true
     - docker build --build-arg HOST=$HOST --build-arg API_FINANCEIRO=$API_FINANCEIRO --build-arg PORT=$PORT -t $NAME .
-    - docker run -d --name interface-whatsapi -p 127.0.0.1:3000:$PORT --restart always $NAME 
+    - docker run -d --name  $NAME -p 127.0.0.1:3000:$PORT --restart always $NAME 
   when: manual
   only:
     - master
