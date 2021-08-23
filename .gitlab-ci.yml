@@ -4,11 +4,10 @@ variables:
   DIR_PATH: "/home/docker/"
 stages:
   - init_project
-
-init_project:
+  
+init_PRODUCTION:
   variables:
     HOST: https://chat.mactus.online
-    SERVER_CHAT: https://maringa1.mactus.online
     API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
   stage: init_project
   script:
@@ -19,4 +18,20 @@ init_project:
   when: manual
   only:
     - master
+
+init_DEVELOPMENT:
+  variables:
+    HOST: https://dev-chat.mactus.online
+    API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
+    PORT: '3001'
+  stage: init_project
+  script:
+    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
+    - docker rm -f $NAME || true
+    - docker build --build-arg HOST=$HOST --build-arg API_FINANCEIRO=$API_FINANCEIRO -t $NAME .
+    - docker run -d --name interface-whatsapi -p 127.0.0.1:3000:$PORT --restart always interface-whatsapi 
+  when: manual
+  only:
+    - master
+
 
