@@ -3,19 +3,7 @@ variables:
   NAME: "interface-whatsapi"
   DIR_PATH: "/home/docker/"
 stages:
-  - logs
   - init_project
-  - node
-  - deploy
-
-logs:
-  stage: logs
-  script:
-    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
-    - docker logs $NAME
-  when: manual
-  only:
-    - master
 
 init_project:
   variables:
@@ -31,28 +19,4 @@ init_project:
   when: manual
   only:
     - master
-
-node:
-  stage: node
-  image: node:alpine
-  script:
-    - yarn install
-    - yarn build
-  artifacts:
-    paths:
-      - ./
-    expire_in: 1 week
-  when: manual
-deploy:
-  variables:
-    NAME: "interface-whatsapi"
-    DIR_PATH: "/home/docker/"
-  stage: deploy
-  script:
-    - cp -apr ./ $DIR_PATH/$NAME/node/
-    - docker restart $NAME
-  artifacts:
-    paths:
-      - ./
-  when: manual
 
