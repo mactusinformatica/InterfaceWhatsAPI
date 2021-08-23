@@ -22,8 +22,6 @@ const ChatClient = ({urlHost})=>{
        serverName = router.query?.server
        userName = router.query?.name.split(' ')[0]
     }
-    
-    const channel = "client";
 
     const active = {
       name: userName,
@@ -32,8 +30,6 @@ const ChatClient = ({urlHost})=>{
       channel:'client',
       schedule: dateTime.time
     }
-
-
     useEffect(
       ()=>{ 
         if(serverName && userName){
@@ -41,11 +37,12 @@ const ChatClient = ({urlHost})=>{
             setUser({
               id: active.id_room,
               name: userName,
+              //server_whatsapi:`http://localhost:5000`
               server_whatsapi: `https://server-${serverName}.mactus.online`
             })
           if(!socket){
           connectSocket(`https://server-${serverName}.mactus.online`)
-          //connectSocket(`http://localhost:5000`)
+         // connectSocket(`http://localhost:5000`)
           }else{
             socket.on('connect', () => {
               setLoading(false);

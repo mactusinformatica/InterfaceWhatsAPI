@@ -59,7 +59,7 @@ export function AuthProvider({children}){
              uId = user.id
              uName = user.name.split(" ")[0]
              uToken = user.token
-            // uServer = "http://localhost:5000"
+             //uServer = "http://localhost:5000"
              uServer = user.server_whatsapi
         }
         return {
