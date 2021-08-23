@@ -89,15 +89,14 @@ const Index = ({urlHost})=>{
                 </>
           }
         </ChatProvider>
-        <Box>
+        {/* <Box>
           <button onClick={(e)=>makeCall()}>
                 Atendimento
           </button>
           <button onClick={(e)=>sendMessage()}>
                 Mensagem
           </button>
-        </Box>
-        
+        </Box> */}
       </Flex>
           
     </Container>
