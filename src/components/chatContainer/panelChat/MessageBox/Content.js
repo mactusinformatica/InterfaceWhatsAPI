@@ -22,6 +22,7 @@ export const Content = ({message,color, fontWeight}) => {
                             display:"flex",
                             alignItems:"center"
                            }}
+                    target='_blank'
                     download>
                         <RiFileTextFill style={{marginRight:"10px"}}/>
                         Arquivo 
