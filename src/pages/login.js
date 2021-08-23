@@ -14,9 +14,11 @@ const Login = ({urlHost, apiFinanceiro})=>{
     const [errorPassword, setErrorPassword] = useState("");
     const [messageSignin, setMessageSignin] = useState("");
     const toast = useToast()
+
     const {colorMode} = useColorMode();
     const primaryColor = { light: 'light.primary', dark: 'dark.primary' }
     const bgColor = { light: 'light.background', dark: 'dark.background' }
+    const fontColor = { light: 'light.fontColor', dark: 'dark.fontColor' }
     const red03 = { light: 'colorful.red03', dark: 'colorful.red03' }
     const red = { light: 'colorful.red', dark: 'colorful.red' }
 
@@ -74,7 +76,7 @@ const Login = ({urlHost, apiFinanceiro})=>{
              p={1} borderBottom="2px" color={bgColor[colorMode]} fontFamily="Otomanopee One" fontSize={"4xl"}marginBottom={"15px"}>
                     MacWhatsAPI!
             </Text>
-            <Box boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
+            <Box  color={fontColor[colorMode]} boxShadow="lg" borderRadius={'15px'} display={"flex"} width={"350px"} bg={bgColor[colorMode]} p={3}
             height={"300px"} flexDirection={"column"} justifyContent={"space-evenly"} alignItems={"center"}>
                      <img width={"60px"} src={`${urlHost}/logo-mactus.png`}/>  
                      
