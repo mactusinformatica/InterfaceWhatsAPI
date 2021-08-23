@@ -28,6 +28,7 @@ export function SocketProvider({children}){
         connectSocket,
         socketEvent,
         connectError,
+        setSocket,
         setConnectError
     }}>
        {children} 

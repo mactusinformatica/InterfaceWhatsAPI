@@ -1,5 +1,6 @@
 
 import useAuth from '../../../hooks/useAuth'
+import useSocket from '../../../hooks/useSocket'
 import {HamburgerIcon} from '@chakra-ui/icons'
 import { Box,useColorMode, Text,Input,Menu,MenuButton,MenuList, MenuItem, IconButton } from "@chakra-ui/react"
 import { BsFillPersonFill,BsFilterRight,BsSearch} from "react-icons/bs"
@@ -8,6 +9,7 @@ import { Avatar } from "../../Avatar";
 import { DarkModeSwitch } from '../../DarkModeSwitch'
 export const Header = (props) => {
     const {user, signout} = useAuth();
+    const {setSocket} = useSocket();
     const firstName = user?.name  
                                                                                                                               
     const {colorMode} = useColorMode();
@@ -64,7 +66,7 @@ export const Header = (props) => {
                         <MenuItem>
                             <DarkModeSwitch />  DarkMode
                         </MenuItem> 
-                        <MenuItem fontSize={'16px'} onClick={()=>signout()} icon={<MdExitToApp fontSize='20px'/>}>
+                        <MenuItem fontSize={'16px'} onClick={()=>signout(setSocket)} icon={<MdExitToApp fontSize='20px'/>}>
                             Sair 
                         </MenuItem> 
                          

@@ -106,16 +106,18 @@ export function AuthProvider({children}){
         }
     }
     
-    const signout = ()=>{
+    const signout = (setSocket)=>{
         setLoading(true);
         try{
             Router.push('/login');
             destroyCookie(undefined, 'macwhatsapi-auth');
-            
+            setUser(null);
+            setSocket(null);
+
         }
         finally{
            // setUser(false);
-            setLoading(false);
+        setLoading(false);
         }
     }
     return <AuthContext.Provider value={{
