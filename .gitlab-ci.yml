@@ -1,58 +1,38 @@
 image: docker:stable
 variables:
-  NAME: "interface-whatsapi"
   DIR_PATH: "/home/docker/"
 stages:
-  - logs
   - init_project
-  - node
-  - deploy
-
-logs:
-  stage: logs
-  script:
-    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
-    - docker logs $NAME
-  when: manual
-  only:
-    - master
-
-init_project:
+  
+init_PRODUCTION:
   variables:
+    NAME: "prod-interface-whatsapi"
     HOST: https://chat.mactus.online
-    SERVER_CHAT: https://maringa1.mactus.online
     API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
   stage: init_project
   script:
     - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
     - docker rm -f $NAME || true
     - docker build --build-arg HOST=$HOST --build-arg API_FINANCEIRO=$API_FINANCEIRO -t $NAME .
-    - docker run -d --name interface-whatsapi -p 127.0.0.1:3000:3000 --restart always interface-whatsapi 
+    - docker run -d --name  $NAME -p 127.0.0.1:3000:3000 --restart always $NAME 
   when: manual
   only:
     - master
 
-node:
-  stage: node
-  image: node:alpine
-  script:
-    - yarn install
-    - yarn build
-  artifacts:
-    paths:
-      - ./
-    expire_in: 1 week
-  when: manual
-deploy:
+init_DEVELOPMENT:
   variables:
-    NAME: "interface-whatsapi"
-    DIR_PATH: "/home/docker/"
-  stage: deploy
+    NAME: "dev-interface-whatsapi"
+    HOST: https://dev-chat.mactus.online
+    API_FINANCEIRO: https://macfinanceiro.mactus.com.br/api/APILogin.php
+    PORT: '3001'
+  stage: init_project
   script:
-    - cp -apr ./ $DIR_PATH/$NAME/node/
-    - docker restart $NAME
-  artifacts:
-    paths:
-      - ./
+    - echo "macinfo" | docker login --username=admin --password-stdin  https://docker.mactus.com.br:5000 || true
+    - docker rm -f $NAME || true
+    - docker build --build-arg HOST=$HOST --build-arg API_FINANCEIRO=$API_FINANCEIRO --build-arg PORT=$PORT -t $NAME .
+    - docker run -d --name  $NAME -p 127.0.0.1:$PORT:3000 --restart always $NAME 
   when: manual
+  only:
+    - master
+
 
