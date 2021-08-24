@@ -10,6 +10,7 @@ export function AuthProvider({children}){
     const[loading, setLoading] = useState(true);
 
     useEffect(()=>{
+        console.log("REFRESH: ",process.env.NODE_ENV)
         const {"macwhatsapi-auth": token} = parseCookies();
         if(token){
             var config = {
@@ -25,7 +26,7 @@ export function AuthProvider({children}){
                         name: res.data.name.split(" ")[0],
                         id: res.data.id,
                         token: res.data.token,
-                        server_whatsapi:process.env.NODE_ENV=="development"?'http://localhost:5000':res.data.dados_adicionais[0].server_whatsapi
+                        server_whatsapi:res.data.dados_adicionais[0].server_whatsapi
                     }
                     console.log("setUserAUTH")
                     setUser(userObj)
@@ -43,7 +44,7 @@ export function AuthProvider({children}){
     },[])
 
     const formatUser = (user)=>{
-        
+        console.log("SIGNIN: ",process.env.NODE_ENV)
         var uId;
         var uName;
         var uToken;
@@ -52,20 +53,20 @@ export function AuthProvider({children}){
              uId = user.id
              uName = user.nome.split(" ")[0]
              uToken = user.token
-             uServer = "http://localhost:5000"
-             //uServer = user.dados_adicionais[0].server_whatsapi
+            // uServer = "http://localhost:5000"
+             uServer = user.dados_adicionais[0].server_whatsapi
         }else if(user.name){
              uId = user.id
              uName = user.name.split(" ")[0]
              uToken = user.token
-             uServer = "http://localhost:5000"
-             //uServer = user.server_whatsapi
+             //uServer = "http://localhost:5000"
+             uServer = user.server_whatsapi
         }
         return {
             id: uId,
             name: uName,
             token: uToken,
-            server_whatsapi: process.env.NODE_ENV=="development"?'http://localhost:5000':uServer
+            server_whatsapi:uServer
         }
     }
 
@@ -90,7 +91,7 @@ export function AuthProvider({children}){
                     })
                     Router.push('/');
                 }else{
-                    console.log(res.data.erro )
+                    console.log(res.data.erro)
                     return false;
                 }
             })
